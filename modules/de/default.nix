@@ -1,3 +1,3 @@
 {
-  imports = [ ./autorandr ./sway ]; #./gnome ];
+  imports = [ ./autorandr ./gnome ];
 }

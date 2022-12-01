@@ -1,6 +1,15 @@
 local dusk = {}
 
 dusk.vivid = {
+  -- convert to tables later instead of base16 shit can do something like
+  -- better handles and groups gradients when themeing
+  -- black = {
+  --   0 = "#1a1a1a",
+  --   10 = "#242424",
+  --   20 = "#2e2e2e",
+  --   etc...
+  -- }
+
   black   = "#1a1a1a",
   red     = "#ef596f",
   green   = "#89ca78",
