@@ -24,7 +24,7 @@
         "aarch64-darwin"
         "x86_64-darwin"
       ];
-      common = { lib, ... }: {
+      common = { ... }: {
         _module.args = { colorscheme = import ./colorschemes/dusky.nix; };
         programs.home-manager.enable = true;
         home.stateVersion = "22.05";
@@ -54,8 +54,7 @@
 	      imports = [ ./modules/de ];
       };
 
-    in
-    rec {
+    in {
       # custom packages go here accessible through 'nix build'
       packages = forAllSystems (system:
         let pkgs = nixpkgs.legacyPackages.${system};
