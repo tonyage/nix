@@ -7,6 +7,7 @@ require("ui.components.telescope")
 require("ui.components.blankline")
 require("ui.components.nvimtree")
 require("ui.components.whichkey")
+require("ui.components.tabuffline.lazy")({ enabled = true })
 
 vim.opt.statusline = "%!v:lua.require('ui.components.statusline').setup()"
 

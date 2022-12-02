@@ -39,7 +39,7 @@ return {
   ModeMsg = { fg = colors.base0B },
   MoreMsg = { fg = colors.base0B },
 
-  NonText = { fg = colors.base03 },
+  NonText = { fg = colors.black },
   Normal = { fg = colors.base05, bg = colors.base00 },
 
   Pmenu = { bg = colors.base00 },

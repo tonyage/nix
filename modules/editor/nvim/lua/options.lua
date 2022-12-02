@@ -30,6 +30,9 @@ opt.numberwidth = 2
 opt.relativenumber = true
 opt.ruler = false
 
+opt.mouse = "a"
+opt.mousemoveevent = true
+
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true

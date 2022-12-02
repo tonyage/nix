@@ -1,7 +1,6 @@
 local colors = require("ui.themer").colorscheme("vivid")
 
 return {
-
   BufferLineBackground = {
     fg = colors.grey00,
     bg = colors.base01,
@@ -19,7 +18,7 @@ return {
   },
 
   BufferLineBufferVisible = {
-    fg = colors.grey00,
+    fg = colors.grey01,
     bg = colors.base01,
   },
 
@@ -36,15 +35,15 @@ return {
   -- close buttons
   BufferLineCloseButton = {
     fg = colors.grey00,
-    bg = colors.base01,
+    bg = colors.base00,
   },
   BufferLineCloseButtonVisible = {
-    fg = colors.grey00,
-    bg = colors.base01,
+    fg = colors.red,
+    bg = colors.base02,
   },
   BufferLineCloseButtonSelected = {
-    fg = colors.red,
-    bg = colors.black,
+    fg = colors.grey00,
+    bg = colors.base00,
   },
   BufferLineFill = {
     fg = colors.grey01,
@@ -83,9 +82,11 @@ return {
     bg = colors.base01,
   },
 
+  BufferLineOffsetSeparator = { fg = colors.base01, bg = colors.base02,},
+
   -- tabs
-  BufferLineTab = { fg = colors.grey00, bg = colors.one_bg3 },
-  BufferLineTabSelected = { fg = colors.base01, bg = colors.nord_blue },
+  BufferLineTab = { fg = colors.grey00, bg = colors.grey02 },
+  BufferLineTabSelected = { fg = colors.base01, bg = colors.blue },
   BufferLineTabClose = { fg = colors.red, bg = colors.black },
 
   BufferLineDevIconDefaultSelected = { bg = "none" },
@@ -93,7 +94,7 @@ return {
 
   BufferLineDuplicate = { fg = "NONE", bg = colors.base01 },
   BufferLineDuplicateSelected = { fg = colors.red, bg = colors.black },
-  BufferLineDuplicateVisible = { fg = colors.blue, bg = colors.base01 },
+  BufferLineDuplicateVisible = { fg = colors.blue, bg = colors.black },
   BufferLineRightCustomAreaText1 = { fg = colors.white },
   BufferLineRightCustomAreaText2 = { fg = colors.red },
 }
