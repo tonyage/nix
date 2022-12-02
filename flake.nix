@@ -12,9 +12,10 @@
 
     nurpkgs.url = "github:nix-community/NUR";
     vim-plugins.url = "path:./modules/editor/nvim/plugins";
+    rust.url = "github:oxalica/rust-overlay";
   };
 
-  outputs = { self, nixpkgs, home-manager, nurpkgs, vim-plugins, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nurpkgs, vim-plugins, rust, ... }@inputs:
     let
       inherit (self) outputs;
       forAllSystems = nixpkgs.lib.genAttrs [
@@ -33,19 +34,19 @@
           ./modules/editor
           ./modules/chat
           ./modules/tui
-          ./modules/fonts.nix
+          ./modules/misc.nix
 	      ];
 
         nixpkgs = {
           overlays = [
             nurpkgs.overlay
             vim-plugins.overlay
+            rust.overlays.default
           ];
           config.allowUnfree = true;
           config.allowUnfreePredicate = (_: true);
         };
-
-          systemd.user.startServices = "sd-switch";
+        systemd.user.startServices = "sd-switch";
       };
 
       linux = {

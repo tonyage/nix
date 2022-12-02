@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-  programs.htop.enable = true;
   programs.exa.enable = true;
   programs.direnv = {
     enable = true;

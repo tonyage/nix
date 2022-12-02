@@ -55,8 +55,9 @@
     gnome-text-editor
     gnome-console
   ]) ++ (with pkgs.gnome; [
-    gnome-music
     yelp
+    geary
+    gnome-music
   ]); 
 
   programs.dconf.enable = true;
