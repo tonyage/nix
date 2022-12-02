@@ -4,32 +4,32 @@ local sep_l = separators["left"]
 local sep_r = separators["right"]
 
 local modes = {
-  ["n"]   = { "NORMAL",              "St_NormalMode"    },
-  ["niI"] = { "NORMAL i",            "St_NormalMode"    },
-  ["niR"] = { "NORMAL r",            "St_NormalMode"    },
-  ["niV"] = { "NORMAL v",            "St_NormalMode"    },
-  ["no"]  = { "N-PENDING",           "St_NormalMode"    },
-  ["i"]   = { "INSERT",              "St_InsertMode"    },
-  ["ic"]  = { "INSERT (completion)", "St_InsertMode"    },
-  ["ix"]  = { "INSERT completion",   "St_InsertMode"    },
-  ["t"]   = { "TERMINAL",            "St_TerminalMode"  },
-  ["nt"]  = { "NTERMINAL",           "St_NTerminalMode" },
-  ["v"]   = { "VISUAL",              "St_VisualMode"    },
-  ["V"]   = { "V-LINE",              "St_VisualMode"    },
-  ["Vs"]  = { "V-LINE (Ctrl O)",     "St_VisualMode"    },
-  [""]  = { "V-BLOCK",             "St_VisualMode"    },
-  ["R"]   = { "REPLACE",             "St_ReplaceMode"   },
-  ["Rv"]  = { "V-REPLACE",           "St_ReplaceMode"   },
-  ["s"]   = { "SELECT",              "St_SelectMode"    },
-  ["S"]   = { "S-LINE",              "St_SelectMode"    },
-  [""]  = { "S-BLOCK",             "St_SelectMode"    },
-  ["c"]   = { "COMMAND",             "St_CommandMode"   },
-  ["cv"]  = { "COMMAND",             "St_CommandMode"   },
-  ["ce"]  = { "COMMAND",             "St_CommandMode"   },
-  ["r"]   = { "PROMPT",              "St_ConfirmMode"   },
-  ["rm"]  = { "MORE",                "St_ConfirmMode"   },
-  ["r?"]  = { "CONFIRM",             "St_ConfirmMode"   },
-  ["!"]   = { "SHELL",               "St_TerminalMode"  },
+  ["n"]   = { "NORMAL",              "NormalMode"    },
+  ["niI"] = { "NORMAL i",            "NormalMode"    },
+  ["niR"] = { "NORMAL r",            "NormalMode"    },
+  ["niV"] = { "NORMAL v",            "NormalMode"    },
+  ["no"]  = { "N-PENDING",           "NormalMode"    },
+  ["i"]   = { "INSERT",              "InsertMode"    },
+  ["ic"]  = { "INSERT (completion)", "InsertMode"    },
+  ["ix"]  = { "INSERT completion",   "InsertMode"    },
+  ["t"]   = { "TERMINAL",            "TerminalMode"  },
+  ["nt"]  = { "NTERMINAL",           "NTerminalMode" },
+  ["v"]   = { "VISUAL",              "VisualMode"    },
+  ["V"]   = { "V-LINE",              "VisualMode"    },
+  ["Vs"]  = { "V-LINE (Ctrl O)",     "VisualMode"    },
+  [""]  = { "V-BLOCK",             "VisualMode"    },
+  ["R"]   = { "REPLACE",             "ReplaceMode"   },
+  ["Rv"]  = { "V-REPLACE",           "ReplaceMode"   },
+  ["s"]   = { "SELECT",              "SelectMode"    },
+  ["S"]   = { "S-LINE",              "SelectMode"    },
+  [""]  = { "S-BLOCK",             "SelectMode"    },
+  ["c"]   = { "COMMAND",             "CommandMode"   },
+  ["cv"]  = { "COMMAND",             "CommandMode"   },
+  ["ce"]  = { "COMMAND",             "CommandMode"   },
+  ["r"]   = { "PROMPT",              "ConfirmMode"   },
+  ["rm"]  = { "MORE",                "ConfirmMode"   },
+  ["r?"]  = { "CONFIRM",             "ConfirmMode"   },
+  ["!"]   = { "SHELL",               "TerminalMode"  },
 }
 
 local M = {}
@@ -38,7 +38,7 @@ M.mode = function()
   local m = vim.api.nvim_get_mode().mode
   local current_mode = "%#" .. modes[m][2] .. "#" .. "  " .. modes[m][1]
   local mode_sep1 = "%#" .. modes[m][2] .. "Sep" .. "#" .. sep_r
-  return current_mode .. mode_sep1 .. "%#ST_EmptySpace#" .. sep_r
+  return current_mode .. mode_sep1 .. "%#buffer#" .. sep_r
 end
 
 M.fileInfo = function()
@@ -51,7 +51,7 @@ M.fileInfo = function()
     icon = (ft_icon ~= nil and " " .. ft_icon) or ""
     filename = " " .. filename .. " "
   end
-  return "%#St_file_info#" .. icon .. filename .. "%#St_file_sep#" .. sep_r
+  return "%#file_info#" .. icon .. filename .. "%#file_sep#" .. sep_r
 end
 
 M.git = function()
@@ -60,11 +60,12 @@ M.git = function()
   end
 
   local git_status = vim.b.gitsigns_status_dict
-  local added = (git_status.added and git_status.added ~= 0) and ("  " .. git_status.added) or ""
-  local changed = (git_status.changed and git_status.changed ~= 0) and ("  " .. git_status.changed) or ""
-  local removed = (git_status.removed and git_status.removed ~= 0) and ("  " .. git_status.removed) or ""
-  local branch_name = "   " .. git_status.head .. " "
-  return "%#St_gitIcons#" .. branch_name .. added .. changed .. removed
+  local branch = "%#git_branch#".. "   " .. git_status.head
+  local added = (git_status.added and git_status.added ~= 0) and ("%#git_added#" .. "  " .. git_status.added) or ""
+  local changed = (git_status.changed and git_status.changed ~= 0) and ("%#git_changed#" .. "  " .. git_status.changed) or ""
+  local removed = (git_status.removed and git_status.removed ~= 0) and ("%#git_removed#" .. "  " .. git_status.removed) or ""
+  local sep = " " .. "%#git_sep#" .. sep_r
+  return branch .. added .. changed .. removed .. sep
 end
 
 M.progress = function()
@@ -85,7 +86,7 @@ M.progress = function()
   local ms = vim.loop.hrtime() / 1000000
   local frame = math.floor(ms / 120) % #spinners
   local content = string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
-  return ("%#St_lspProgress#" .. content) or ""
+  return ("%#lsp_progress#" .. content) or ""
 end
 
 M.diagnostics = function()
@@ -98,32 +99,35 @@ M.diagnostics = function()
   local hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
   local info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
 
-  local e = (errors and errors > 0) and ("%#St_lspError#" .. " " .. errors .. " ") or ""
-  local w = (warnings and warnings > 0) and ("%#St_lspWarning#" .. "  " .. warnings .. " ") or ""
-  local h = (hints and hints > 0) and ("%#St_lspHints#" .. "ﯧ " .. hints .. " ") or ""
-  local i = (info and info > 0) and ("%#St_lspInfo#" .. " " .. info .. " ") or ""
+  local e = (errors and errors > 0) and ("%#lsp_error#" .. " " .. errors .. " ") or ""
+  local w = (warnings and warnings > 0) and ("%#lsp_warning#" .. "  " .. warnings .. " ") or ""
+  local h = (hints and hints > 0) and ("%#lsp_hints#" .. "ﯧ " .. hints .. " ") or ""
+  local i = (info and info > 0) and ("%#lsp_info#" .. " " .. info .. " ") or ""
 
   return e .. w .. h .. i
 end
 
 M.status = function()
+  local sep = "%#lsp_sep#" .. sep_l
+  local icon = "%#lsp_icon#" .. "  "
+  local text = "%#lsp_text#" .. " "
   if rawget(vim, "lsp") then
     for _, client in ipairs(vim.lsp.get_active_clients()) do
       if client.attached_buffers[vim.api.nvim_get_current_buf()] then
-        return (vim.o.columns > 100 and "%#St_lspStatus#" .. "   LSP::" .. client.name .. " ") or "   LSP "
+        return (vim.o.columns > 100 and sep .. icon .. text .. client.name .. " ")
       end
     end
   end
 end
 
 M.cwd = function()
-  local dir_icon = "%#St_cwd_icon#" .. " "
-  local dir_name = "%#St_cwd_text#" .. " " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t") .. " "
-  return (vim.o.columns > 85 and ("%#St_cwd_sep#" .. sep_l .. dir_icon .. dir_name)) or ""
+  local icon = "%#cwd_icon#" .. " "
+  local name = "%#cwd_text#" .. " " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t") .. " "
+  return (vim.o.columns > 85 and ("%#cwd_sep#" .. sep_l .. icon .. name)) or ""
 end
 
 M.position = function()
-  local left_sep = "%#St_pos_sep#" .. sep_l .. "%#St_pos_icon#" .. " "
+  local left_sep = "%#pos_sep#" .. sep_l .. "%#pos_icon#" .. " "
 
   local current_line = vim.fn.line "."
   local total_line = vim.fn.line "$"
@@ -132,7 +136,7 @@ M.position = function()
   text = (current_line == 1 and "Top") or text
   text = (current_line == total_line and "Bot") or text
 
-  return left_sep .. "%#St_pos_text#" .. " " .. text .. " "
+  return left_sep .. "%#pos_text#" .. " " .. text .. " "
 end
 
 return M

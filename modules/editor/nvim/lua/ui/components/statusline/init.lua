@@ -6,7 +6,7 @@ local modules = require("ui.components.statusline.modules")
 function M.setup()
   return table.concat {
     modules.mode(),
-    modules.fileInfo(),
+    -- modules.fileInfo(),
     modules.git(),
 
     "%=",
@@ -15,7 +15,7 @@ function M.setup()
 
     modules.diagnostics(),
     modules.status() or "",
-    modules.cwd(),
+    -- modules.cwd(),
     modules.position(),
   }
 end
