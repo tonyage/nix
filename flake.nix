@@ -44,7 +44,7 @@
             rust.overlays.default
           ];
           config.allowUnfree = true;
-          config.allowUnfreePredicate = (_: true);
+          config.allowUnfreePredicate = _: true;
         };
         systemd.user.startServices = "sd-switch";
       };
