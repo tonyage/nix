@@ -1,4 +1,4 @@
-local isBufValid = require("ui.components.tabuffline").isBufValid
+local buf_is_valid = require("ui.components.tabuffline").buf_is_valid
 return function(opts)
   if not opts.enabled then
     return
@@ -21,7 +21,7 @@ return function(opts)
           not vim.tbl_contains(bufs, args.buf)
           and (args.event == "BufEnter" or vim.bo[args.buf].buflisted)
           and (args.event == "BufEnter" or args.buf ~= vim.api.nvim_get_current_buf())
-          and isBufValid(args.buf)
+          and buf_is_valid(args.buf)
         then
           table.insert(bufs, args.buf)
           vim.t.bufs = bufs
@@ -50,12 +50,12 @@ return function(opts)
   if opts.lazyload then
     vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", "TabEnter", "TermOpen" }, {
       pattern = "*",
-      group = vim.api.nvim_create_augroup("TabuflineLazyLoad", {}),
+      group = vim.api.nvim_create_augroup("TabufflineLazyLoad", {}),
       callback = function()
         if #vim.fn.getbufinfo { buflisted = 1 } >= 2 or #vim.api.nvim_list_tabpages() >= 2 then
           vim.opt.showtabline = 2
           vim.opt.tabline = "%!v:lua.require('ui.components.tabuffline').setup()"
-          vim.api.nvim_del_augroup_by_name "TabuflineLazyLoad"
+          vim.api.nvim_del_augroup_by_name "TabufflineLazyLoad"
         end
       end,
     })

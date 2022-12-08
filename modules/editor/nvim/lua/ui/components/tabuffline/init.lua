@@ -1,7 +1,7 @@
 local M = {}
 local api = vim.api
 
-M.isBufValid = function(bufnr)
+M.buf_is_valid = function(bufnr)
   return vim.api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].buflisted
 end
 
@@ -13,7 +13,7 @@ M.bufilter = function()
   end
 
   for i = #bufs, 1, -1 do
-    if not M.isBufValid(bufs[i]) then
+    if not M.buf_is_valid(bufs[i]) then
       table.remove(bufs, i)
     end
   end
@@ -90,9 +90,7 @@ M.move_buf = function(n)
 end
 
 M.setup = function()
-  local modules = require "ui.components.tabuffline.modules"
-
-  -- merge user modules :D
+  local modules = require("ui.components.tabuffline.modules")
   local result = modules.bufferlist() .. (modules.tablist() or "") .. modules.buttons()
   return (vim.g.nvimtree_side == "left") and modules.CoverNvimTree() .. result or result .. modules.CoverNvimTree()
 end
