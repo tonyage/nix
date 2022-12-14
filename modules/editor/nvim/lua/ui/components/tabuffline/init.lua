@@ -2,7 +2,6 @@ local util = require("ui.components")
 local M = {}
 
 M.buf_is_valid = function(bufnr)
-  if not bufnr or bufnr < 1 then return false end
   return vim.bo[bufnr].buflisted and vim.api.nvim_buf_is_valid(bufnr)
 end
 
@@ -22,7 +21,7 @@ M.bufilter = function()
   return bufs
 end
 
-M.tabuflineNext = function()
+M.tabufline_next = function()
   local bufs = M.bufilter() or {}
 
   for i, v in ipairs(bufs) do
@@ -33,7 +32,7 @@ M.tabuflineNext = function()
   end
 end
 
-M.tabuflinePrev = function()
+M.tabufline_prev = function()
   local bufs = M.bufilter() or {}
 
   for i, v in ipairs(bufs) do

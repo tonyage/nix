@@ -1,9 +1,6 @@
 local buf_is_valid = require("ui.components.tabuffline").buf_is_valid
-return function(opts)
-  if not opts.enabled then
-    return
-  end
-
+local key = require("mappings")
+return function()
   vim.t.bufs = vim.api.nvim_list_bufs()
 
   vim.api.nvim_create_autocmd({ "BufAdd", "BufEnter", "tabnew" }, {
@@ -26,6 +23,9 @@ return function(opts)
     end,
   })
 
+  key.map("n", "<TAB>", function() require("ui.components.tabuffline").tabufline_next() end)
+  key.map("n", "<S-TAB>", function() require("ui.components.tabuffline").tabufline_prev() end)
+
   vim.api.nvim_create_autocmd("BufDelete", {
     callback = function(args)
       for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
@@ -43,20 +43,15 @@ return function(opts)
     end,
   })
 
-  if opts.lazyload then
-    vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", "TabEnter", "TermOpen" }, {
-      pattern = "*",
-      group = vim.api.nvim_create_augroup("TabufflineLazyLoad", {}),
-      callback = function()
-        if #vim.fn.getbufinfo { buflisted = 1 } >= 2 or #vim.api.nvim_list_tabpages() >= 2 then
-          vim.opt.showtabline = 2
-          vim.opt.tabline = "%!v:lua.require('ui.components').tabuffline()"
-          vim.api.nvim_del_augroup_by_name("TabufflineLazyLoad")
-        end
-      end,
-    })
-  else
-    vim.opt.showtabline = 2
-    vim.opt.tabline = "%!v:lua.require('ui.components').tabuffline()"
-  end
+  vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", "TabEnter", "TermOpen" }, {
+    pattern = "*",
+    group = vim.api.nvim_create_augroup("TabufflineLazyLoad", {}),
+    callback = function()
+      if #vim.fn.getbufinfo { buflisted = 1 } >= 2 or #vim.api.nvim_list_tabpages() >= 2 then
+        vim.opt.showtabline = 2
+        vim.opt.tabline = "%!v:lua.require('ui.components').tabuffline()"
+        vim.api.nvim_del_augroup_by_name("TabufflineLazyLoad")
+      end
+    end,
+  })
 end
