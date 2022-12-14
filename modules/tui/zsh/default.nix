@@ -29,7 +29,7 @@ in
 
       P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
       [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
-      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=${colorscheme.grey01}'
+      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=${colorscheme.grey90}'
       ${builtins.readFile ./docker.zsh} 
       ${builtins.readFile ./utils.zsh} 
       eval "$(zoxide init zsh)"

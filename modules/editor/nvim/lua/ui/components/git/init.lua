@@ -7,12 +7,12 @@ local config = {
       if vim.wo.diff then return "gcn" end
       vim.schedule(function() gs.next_hunk() end)
       return "<Ignore>"
-    end, { expr = true })
+    end, { expr = true, buffer = bufnr })
     key.map("n", "gcb", function()
       if vim.wo.diff then return "gcb" end
       vim.schedule(function() gs.prev_hunk() end)
       return "<Ignore>"
-    end, { expr = true })
+    end, { expr = true, buffer = bufnr })
     key.map("n", "grh", function() gs.reset_hunk() end)
     key.map("n", "gph", function() gs.preview_hunk() end)
     key.map("n", "gbl", function() gs.blame_line({ full = true }) end)
