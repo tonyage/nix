@@ -13,6 +13,8 @@ local config = {
       vim.schedule(function() gs.prev_hunk() end)
       return "<Ignore>"
     end, { expr = true, buffer = bufnr })
+    key.map("n", "gdt", gs.diffthis)
+    key.map("n", "gsh", function() gs.stage_hunk() end)
     key.map("n", "grh", function() gs.reset_hunk() end)
     key.map("n", "gph", function() gs.preview_hunk() end)
     key.map("n", "gbl", function() gs.blame_line({ full = true }) end)

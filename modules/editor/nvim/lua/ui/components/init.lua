@@ -28,7 +28,7 @@ end
 
 M.setup = function()
   vim.opt.statusline = "%!v:lua.require('ui.components.statusline').setup()"
-  require("ui.components.tabuffline.lazy")
+  require("ui.components.tabuffline.lazy")({ lazyload = true })
 end
 
 return M
