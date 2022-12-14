@@ -104,6 +104,10 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 7d";
+    };
   };
 
   # List packages installed in system profile. To search, run:
