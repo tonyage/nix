@@ -16,11 +16,12 @@ for _, server in ipairs(default_servers) do
   })
 end
 
-
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 null.setup({
   sources = {
+    null.builtins.code_actions.gitsigns,
+
     null.builtins.formatting.markdownlint,
     null.builtins.diagnostics.markdownlint,
 
