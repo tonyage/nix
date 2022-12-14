@@ -10,6 +10,7 @@ in
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
+
   };
 
   programs.zsh = {
@@ -28,7 +29,7 @@ in
 
       P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
       [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
-      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=${colorscheme.grey00}'
+      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=${colorscheme.grey01}'
       ${builtins.readFile ./docker.zsh} 
       ${builtins.readFile ./utils.zsh} 
       eval "$(zoxide init zsh)"
@@ -44,7 +45,7 @@ in
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "adb" "colored-man-pages" "fzf" "gradle" "ripgrep" "rust" "thefuck" "web-search" "zoxide" ];
+      plugins = [ "adb" "colored-man-pages" "fzf" "gradle" "ripgrep" "rust" "web-search" "zoxide" ];
     };
 
     plugins = [

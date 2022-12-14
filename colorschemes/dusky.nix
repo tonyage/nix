@@ -1,5 +1,5 @@
 {
-  name = "onedarkish";
+  name = "dusky";
 
   black          = "#1a1a1a";
   red            = "#e06c75";
