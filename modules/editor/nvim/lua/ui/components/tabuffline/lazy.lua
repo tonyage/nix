@@ -4,11 +4,8 @@ return function(opts)
     return
   end
 
-  -- store listed buffers in tab local var
   vim.t.bufs = vim.api.nvim_list_bufs()
 
-  -- autocmds for tabufline -> store bufnrs on bufadd, bufenter events
-  -- thx to https://github.com/ii14 & stores buffer per tab -> table
   vim.api.nvim_create_autocmd({ "BufAdd", "BufEnter", "tabnew" }, {
     callback = function(args)
       if vim.t.bufs == nil then
@@ -16,7 +13,6 @@ return function(opts)
       else
         local bufs = vim.t.bufs
 
-        -- check for duplicates
         if
           not vim.tbl_contains(bufs, args.buf)
           and (args.event == "BufEnter" or vim.bo[args.buf].buflisted)
@@ -54,13 +50,13 @@ return function(opts)
       callback = function()
         if #vim.fn.getbufinfo { buflisted = 1 } >= 2 or #vim.api.nvim_list_tabpages() >= 2 then
           vim.opt.showtabline = 2
-          vim.opt.tabline = "%!v:lua.require('ui.components.tabuffline').setup()"
-          vim.api.nvim_del_augroup_by_name "TabufflineLazyLoad"
+          vim.opt.tabline = "%!v:lua.require('ui.components').tabuffline()"
+          vim.api.nvim_del_augroup_by_name("TabufflineLazyLoad")
         end
       end,
     })
   else
     vim.opt.showtabline = 2
-    vim.opt.tabline = "%!v:lua.require('ui.components.tabuffline').setup()"
+    vim.opt.tabline = "%!v:lua.require('ui.components').tabuffline()"
   end
 end

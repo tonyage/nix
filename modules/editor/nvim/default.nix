@@ -12,7 +12,6 @@
       nvim-colorizer-lua
 
       gitsigns-nvim
-      vim-fugitive
 
       nvim-tree-lua
       cheatsheet-nvim
@@ -26,8 +25,6 @@
       nvim-regexplainer
       nvim-better-digraphs
       todo-comments-nvim
-
-      bufferline-nvim
 
       telescope-nvim
       telescope-fzf-native-nvim

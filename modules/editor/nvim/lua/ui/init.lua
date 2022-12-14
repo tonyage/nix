@@ -1,2 +1,2 @@
-require("ui.components")
+require("ui.components").setup()
 

@@ -54,12 +54,11 @@ M.lsp = {
 
   hint = {
     name = "Hint",
-    icon = "",
-  },
+    icon = "", },
 
   warn = {
     name = "Warn",
-    icon = "",
+    icon = ""
   },
 }
 

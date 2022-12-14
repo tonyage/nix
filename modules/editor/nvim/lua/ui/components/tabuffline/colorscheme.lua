@@ -11,7 +11,7 @@ return {
   },
 
   TbLineBufOff = {
-    fg = colors.grey00,
+    fg = colors.white,
     bg = colors.base01,
   },
 

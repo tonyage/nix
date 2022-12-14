@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ colorscheme, lib, pkgs, ... }:
 let
   main = ./p10k/.p10k.zsh;
   tty = ./p10k/.p10k.tty.zsh;
@@ -28,7 +28,7 @@ in
 
       P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
       [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
-
+      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=${colorscheme.grey00}'
       ${builtins.readFile ./docker.zsh} 
       ${builtins.readFile ./utils.zsh} 
       eval "$(zoxide init zsh)"
