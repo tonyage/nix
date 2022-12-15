@@ -1,7 +1,3 @@
-gi() {
-  curl -sL https://www.gitignore.io/api/$argv >> ./.gitignore;
-}
-
 flakify() {
   if [ ! -e flake.nix ]; then
     nix flake new -t github:nix-community/nix-direnv
@@ -11,3 +7,14 @@ flakify() {
   fi
   "${EDITOR:-nvim}" flake.nix
 }
+
+jvm-flakify() {
+  if [ ! -e flake.nix ]; then
+    nix flake new -t github:tonyage/nix
+  elif [ ! -e .envrc ]; then
+    echo "use flake" > .envrc
+    direnv allow
+  fi
+  "${EDITOR:-nvim}" flake.nix
+}
+
