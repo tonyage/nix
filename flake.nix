@@ -10,7 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    darwin = {
+    darwinpkgs = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -19,10 +19,9 @@
     rust.url = "github:oxalica/rust-overlay";
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, nurpkgs, rust, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, darwinpkgs, nurpkgs, rust, ... }@inputs:
     let
       inherit (self) outputs;
-      inherit (nixpkgs.lib) attrValues;
       forAllSystems = nixpkgs.lib.genAttrs [
         "aarch64-linux"
         "i686-linux"
@@ -118,7 +117,7 @@
       };
 
       darwinConfigurations = {
-        "m1" = darwin.lib.darwinSystem {
+        "m1" = darwinpkgs.lib.darwinSystem {
             system = "aarch64-darwin";
             modules = [
               home-manager.darwinModules.home-manager {

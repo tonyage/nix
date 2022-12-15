@@ -1,4 +1,4 @@
-{ configs, pkgs, ... }: {
+{ colorscheme }: {
   programs.git = {
     enable = true;
     userName = "Tony Do";
@@ -13,11 +13,11 @@
       enable = true;
       options = {
         features = "line-numbers decorations";
-	decorations = {
-	  commit-decoraction-style = "blue ol";
-	  commit-style = "raw";
-	};
-	syntax-theme = "TwoDark";
+        decorations = {
+          commit-decoraction-style = "blue ol";
+          commit-style = "raw";
+        };
+        syntax-theme = "TwoDark";
       };
     };
 
