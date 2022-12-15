@@ -32,7 +32,6 @@ in
       ${builtins.readFile ./docker.zsh} 
       ${builtins.readFile ./utils.zsh} 
       eval $(zoxide init zsh)
-      eval $(zellji setup --generate-auto-start zsh)
     '';
 
     initExtra = ''
@@ -41,6 +40,7 @@ in
       else
         [[ ! -f ${tty} ]] || source ${tty}
       fi
+      eval $(zellji setup --generate-auto-start zsh)
     '';
 
     oh-my-zsh = {
