@@ -1,6 +1,13 @@
 local key = require("mappings")
 local M = {}
 
+require("plugins.lsp.utils").lsp()
+
+key.map("n", "<leader>o", vim.diagnostic.open_float(), { noremap = true, silent = true })
+key.map("n", "gn", vim.diagnostic.goto_next(), { noremap = true, silent = true })
+key.map("n", "gb", vim.diagnostic.goto_prev(), { noremap = true, silent = true })
+key.map("n", "gq", vim.diagnostic.setloclist(), { noremap = true, silent = true } )
+
 M.on_attach = function(client, bufnr)
   client.server_capabilities.documentFormattingProvider = false
   client.server_capabilities.documentRangeFormattingProvider = false
@@ -19,10 +26,6 @@ M.on_attach = function(client, bufnr)
   key.map("n", "grn", require("plugins.renamer").open(), opts)
   key.map("n", "<A><CR>", vim.lsp.buf.code_action(), opts)
   key.map("n", "gfm", vim.lsp.buf.format({ async = true }), opts)
-  key.map("n", "<leader>o", vim.diagnostic.open_float(), { noremap = true, silent = true })
-  key.map("n", "gn", vim.diagnostic.goto_next(), { noremap = true, silent = true })
-  key.map("n", "gb", vim.diagnostic.goto_prev(), { noremap = true, silent = true })
-  key.map("n", "gq", vim.diagnostic.setloclist(), { noremap = true, silent = true } )
   key.map("n", "gwa", vim.lsp.buf.add_workspace_folder(), opts)
   key.map("n", "gwr", vim.lsp.buf.remove_workspace_folder(), opts)
   key.map("n", "gwl", function()
@@ -30,7 +33,7 @@ M.on_attach = function(client, bufnr)
   end, opts)
 
   if client.server_capabilities.signatureHelpProvider then
-    require("lsp.signature").setup(client)
+    require("plugins.lsp.signature").setup(client)
   end
 end
 

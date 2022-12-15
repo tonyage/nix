@@ -33,7 +33,7 @@
 	        ./modules/browser
           ./modules/editor
           ./modules/chat
-          ./modules/tui
+          ./modules/shell
           ./modules/misc.nix
 	      ];
 
@@ -74,11 +74,7 @@
         nixos = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs outputs; };
-          modules = [ 
-            ./nixos/configuration.nix
-            common
-            linux
-          ];
+          modules = [ ./nixos/configuration.nix ];
         };
       };
 
