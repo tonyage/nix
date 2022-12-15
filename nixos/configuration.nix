@@ -53,7 +53,6 @@
     gnome-photos
     gnome-tour
     gnome-text-editor
-    gnome-console
   ]) ++ (with pkgs.gnome; [
     yelp
     geary
@@ -123,6 +122,7 @@
     ripgrep
     binutils
     coreutils
+    alacritty
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -139,8 +139,22 @@
   services.openssh.enable = true;
 
   # Docker
-  virtualisation.docker.enable = true;
-  virtualisation.docker.autoPrune.enable = true;
+  virtualisation.docker = { 
+    enable = true;
+    autoPrune.enable = true;
+  };
+
+  fonts = {
+    fontDir.enable = true;
+    fonts = with pkgs; [
+      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    ];
+  };
+
+  security.sudo = {
+    enable = true;
+    wheelNeedsPassword = false;
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
