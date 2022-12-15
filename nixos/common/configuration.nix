@@ -2,10 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-
-{
-  imports = [ ./hardware-configuration.nix ];
+{ config, pkgs, ... }: {
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -14,7 +11,6 @@
 
   documentation.nixos.enable = false;
 
-  networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -33,31 +29,6 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.excludePackages = [ pkgs.xterm ];
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "tony";
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
-
-  environment.gnome.excludePackages = (with pkgs; [
-    epiphany
-    gnome-photos
-    gnome-tour
-    gnome-text-editor
-  ]) ++ (with pkgs.gnome; [
-    yelp
-    geary
-    gnome-music
-  ]); 
 
   programs.dconf.enable = true;
 
@@ -86,16 +57,6 @@
   # Shells
   environment.binsh = "${pkgs.dash}/bin/dash";
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.tony = {
-    isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
-  };
-
-  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   nix = {
@@ -122,7 +83,6 @@
     ripgrep
     binutils
     coreutils
-    alacritty
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
