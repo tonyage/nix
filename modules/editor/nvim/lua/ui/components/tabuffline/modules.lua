@@ -135,13 +135,13 @@ end
 ---------------------------------------------------------- components ------------------------------------------------------------
 local M = {}
 
-M.cover_nvim_tree = function()
-  return "%#NvimTreeNormal#" .. (vim.g.nvimtree_side == "right" and "" or string.rep(" ", nvim_tree_width()))
+M.offset_tree = function()
+  return "%#NvimTreeNormal#" .. string.rep(" ", nvim_tree_width())
 end
 
 M.bufferlist = function()
   local buffers = {}
-  local available_space = vim.o.columns - nvim_tree_width() - button_width()
+  local available_space = vim.o.columns + nvim_tree_width() - button_width()
   local current_buf = vim.api.nvim_get_current_buf()
   local has_current = false -- have we seen current buffer yet?
 

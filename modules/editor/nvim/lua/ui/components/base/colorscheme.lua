@@ -1,6 +1,6 @@
 local colors = require("ui.themer").colorscheme("vivid")
 return {
-  Comment = { fg = colors.grey01, italic = true },
+  Comment = { fg = colors.grey02, italic = true },
   Conceal = { bg = "NONE" },
   ColorColumn = { bg = colors.base01, sp = "none" },
   CursorColumn = { bg = colors.base01, sp = "none" },
@@ -39,7 +39,7 @@ return {
   ModeMsg = { fg = colors.base0B },
   MoreMsg = { fg = colors.base0B },
 
-  NonText = { fg = colors.black },
+  NonText = { fg = colors.grey02 },
   Normal = { fg = colors.base05, bg = colors.base00 },
 
   Pmenu = { bg = colors.base00 },
