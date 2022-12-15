@@ -19,11 +19,7 @@
       nvim-autopairs
       comment-nvim
       nvim-surround
-      nvim-headlines
       nvim-lspconfig
-      # nvim-lspsaga
-      nvim-regexplainer
-      nvim-better-digraphs
       todo-comments-nvim
 
       telescope-nvim

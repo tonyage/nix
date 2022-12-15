@@ -98,78 +98,13 @@
         "type": "github"
       }
     },
-    "nvim-better-digraphs-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1650987584,
-        "narHash": "sha256-CnuEllJ3GmOncdk/E/AMQaw1j+cqnq4Nznzcd2yfCRM=",
-        "owner": "protex",
-        "repo": "better-digraphs.nvim",
-        "rev": "0312fa370c8aa031f9d55a46384f7c8adf3c4cb5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "protex",
-        "repo": "better-digraphs.nvim",
-        "type": "github"
-      }
-    },
-    "nvim-headlines-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1658198967,
-        "narHash": "sha256-Cy9Fh9RYldIfG021fY54PDCgeL7bs2sK28LGIHyVZYA=",
-        "owner": "lukas-reineke",
-        "repo": "headlines.nvim",
-        "rev": "1cd93a641c03419bb255f8b3fe734451517763b1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "lukas-reineke",
-        "repo": "headlines.nvim",
-        "type": "github"
-      }
-    },
-    "nvim-lspsaga-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1669424273,
-        "narHash": "sha256-iym8rQDEp80wjvg7E76+ei3eYvPXuTI3psrYXZRTbIM=",
-        "owner": "glepnir",
-        "repo": "lspsaga.nvim",
-        "rev": "af711c8985dfced92a5883591f221ba223841f76",
-        "type": "github"
-      },
-      "original": {
-        "owner": "glepnir",
-        "repo": "lspsaga.nvim",
-        "type": "github"
-      }
-    },
-    "nvim-regexplainer-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1669123606,
-        "narHash": "sha256-RYhe1vIMRbEJ4bi34s+tHPfpVi1HJtwbB+AHXKPDvzA=",
-        "owner": "bennypowers",
-        "repo": "nvim-regexplainer",
-        "rev": "103b97c194e452ffc581ba8c7cb9c5dc3c648e41",
-        "type": "github"
-      },
-      "original": {
-        "owner": "bennypowers",
-        "repo": "nvim-regexplainer",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "hardware": "hardware",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nurpkgs": "nurpkgs",
-        "rust": "rust",
-        "vim-plugins": "vim-plugins"
+        "rust": "rust"
       }
     },
     "rust": {
@@ -204,24 +139,6 @@
         "owner": "numtide",
         "repo": "flake-utils",
         "type": "github"
-      }
-    },
-    "vim-plugins": {
-      "inputs": {
-        "nvim-better-digraphs-src": "nvim-better-digraphs-src",
-        "nvim-headlines-src": "nvim-headlines-src",
-        "nvim-lspsaga-src": "nvim-lspsaga-src",
-        "nvim-regexplainer-src": "nvim-regexplainer-src"
-      },
-      "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-tYe5ATylcxqAXPoib386bF/0SzZgxyCzKwtnwUuZJIQ=",
-        "path": "./modules/editor/nvim/plugins",
-        "type": "path"
-      },
-      "original": {
-        "path": "./modules/editor/nvim/plugins",
-        "type": "path"
       }
     }
   },
