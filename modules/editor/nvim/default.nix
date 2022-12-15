@@ -56,7 +56,6 @@
 
       (nvim-treesitter.withPlugins (plugins: with plugins; [
         tree-sitter-bash
-        tree-sitter-zsh
         tree-sitter-c
         tree-sitter-cpp
         tree-sitter-cmake

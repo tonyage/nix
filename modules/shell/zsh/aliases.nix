@@ -8,4 +8,6 @@
   "....." = "cd ../../../../";
   rip = "rm -rf";
   zmux = "zellij";
+  zrun = "zellij run";
+  zedit = "zellij edit";
 }

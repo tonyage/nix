@@ -1,4 +1,4 @@
-{ colorscheme, ... }: {
+{ colorscheme, pkgs, ... }: {
   programs.zellij = {
     enable = true;
     settings = {
@@ -17,6 +17,8 @@
         inherit (colorscheme) white;
         inherit (colorscheme) orange;
       };
+      copy_on_select = true;
+      default_shell = "zsh";
     };
   };
 }
