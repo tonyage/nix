@@ -46,7 +46,7 @@ vim.notify = function(msg, log_level)
   end
 end
 
--- Borders for LspInfo winodw
+-- Borders for LspInfo window
 local win = require "lspconfig.ui.windows"
 local _default_opts = win.default_opts
 
@@ -71,9 +71,9 @@ M.on_attach = function(client, bufnr)
   key.map("n", "gr", vim.lsp.buf.references, opts)
   key.map("n", "gsh", vim.lsp.buf.signature_help, opts)
   key.map("n", "gt", vim.lsp.buf.type_definition, opts)
-  key.map("n", "grn", require("plugins.renamer").open(), opts)
+  key.map("n", "grn", function() require("plugins.renamer").open() end, opts)
   key.map("n", "<A><CR>", vim.lsp.buf.code_action, opts)
-  key.map("n", "gfm", vim.lsp.buf.format({ async = true }), opts)
+  key.map("n", "gfm", function() vim.lsp.buf.format({ async = true }) end, opts)
   key.map("n", "gwa", vim.lsp.buf.add_workspace_folder, opts)
   key.map("n", "gwr", vim.lsp.buf.remove_workspace_folder, opts)
   key.map("n", "gwl", function()
