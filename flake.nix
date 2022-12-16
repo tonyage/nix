@@ -58,17 +58,6 @@
         imports = [ ./nixos/common/configuration.nix ];
       };
 
-      darwin = { ... }: {
-        home.homeDirectory = "/Users/tony.do";
-        home.username = "tony.do";
-        imports = [
-          ./modules/shell
-          ./modules/editor
-          ./modules/misc.nix
-          ./modules/chat/slack
-        ];
-      };
-
       linux = { ... }: {
         home.homeDirectory = "/home/tony";
         home.username = "tony";
@@ -120,19 +109,6 @@
         };
       };
 
-      darwinConfigurations = {
-        "m1" = darwinpkgs.lib.darwinSystem {
-            system = "aarch64-darwin";
-            modules = [
-              home-manager.darwinModules.home-manager {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-              }
-              ./darwin/configuration.nix
-            ];
-        };
-      };
-
       homeConfigurations = {
         "tony@cyclops" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
@@ -149,12 +125,6 @@
           modules = [
             common
             server
-          ];
-        };
-        "tony.do@m1" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."aarch64-darwin";
-          modules = [
-            darwin
           ];
         };
       };
