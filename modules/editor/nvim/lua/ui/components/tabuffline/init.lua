@@ -7,23 +7,17 @@ end
 
 M.bufilter = function()
   local bufs = vim.t.bufs or nil
-
-  if not bufs then
-    return {}
-  end
-
+  if not bufs then return {} end
   for i = #bufs, 1, -1 do
     if not M.buf_is_valid(bufs[i]) then
       table.remove(bufs, i)
     end
   end
-
   return bufs
 end
 
 M.tabufline_next = function()
   local bufs = M.bufilter() or {}
-
   for i, v in ipairs(bufs) do
     if vim.api.nvim_get_current_buf() == v then
       vim.cmd(i == #bufs and "b" .. bufs[1] or "b" .. bufs[i + 1])
@@ -34,7 +28,6 @@ end
 
 M.tabufline_prev = function()
   local bufs = M.bufilter() or {}
-
   for i, v in ipairs(bufs) do
     if vim.api.nvim_get_current_buf() == v then
       vim.cmd(i == 1 and "b" .. bufs[#bufs] or "b" .. bufs[i - 1])
@@ -55,15 +48,12 @@ end
 
 M.close_all_buffers = function(action)
   local bufs = vim.t.bufs
-
   if action == "closeTab" then
     vim.cmd("tabclose")
   end
-
   for _, buf in ipairs(bufs) do
     M.close_buffer(buf)
   end
-
   if action ~= "closeTab" then
     vim.cmd("enew")
   end
@@ -71,7 +61,6 @@ end
 
 M.move_buf = function(n)
   local bufs = vim.t.bufs
-
   for i, bufnr in ipairs(bufs) do
     if bufnr == vim.api.nvim_get_current_buf() then
       if n < 0 and i == 1 or n > 0 and i == #bufs then
@@ -89,7 +78,8 @@ end
 M.setup = function()
   local modules = require("ui.components.tabuffline.modules")
   local result = modules.bufferlist() .. (modules.tablist() or "") .. modules.buttons()
-  return (vim.g.nvimtree_side == "left") and modules.offset_tree() .. result or result .. modules.offset_tree()
+  return modules.offset_tree() .. result
 end
 
 return M
+

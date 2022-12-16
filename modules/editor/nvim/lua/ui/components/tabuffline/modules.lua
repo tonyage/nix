@@ -132,7 +132,6 @@ local function style_buffer_tab(nr)
   return name
 end
 
----------------------------------------------------------- components ------------------------------------------------------------
 local M = {}
 
 M.offset_tree = function()
@@ -143,24 +142,22 @@ M.bufferlist = function()
   local buffers = {}
   local available_space = vim.o.columns + nvim_tree_width() - button_width()
   local current_buf = vim.api.nvim_get_current_buf()
-  local has_current = false -- have we seen current buffer yet?
+  local has_current = false
 
   if vim.g.pickbuffer then
     for index, value in ipairs(vim.g.visiblebuffers) do
-      local name = value:gsub("", "(" .. index .. ")")
+      print("index: " .. tostring(index))
+      local name = value:gsub("", "(".. index ..")")
       table.insert(buffers, name)
     end
-    return table.concat(buffers) .. "%#TblineFill#" .. "%=" -- buffers + empty space
+    return table.concat(buffers) .. "%#TblineFill#" .. "%="
   end
 
   vim.g.buffirst = 0
   for _, bufnr in ipairs(vim.t.bufs) do
     if buf_is_valid(bufnr) then
       if ((#buffers + 1) * 21) > available_space then
-        if has_current then
-          break
-        end
-
+        if has_current then break end
         vim.g.buffirst = vim.g.buffirst + 1
         table.remove(buffers, 1)
       end
