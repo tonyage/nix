@@ -68,10 +68,10 @@
         home.homeDirectory = "/Users/tony.do";
         home.username = "tony.do";
         imports = [
-          "./modules/shell"
-          "./modules/editor"
-          "./modules/misc.nix"
-          "./modules/chat/slack"
+          ./modules/shell
+          ./modules/editor
+          ./modules/misc.nix
+          ./modules/chat/slack
         ];
       };
        
@@ -128,7 +128,7 @@
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
               }
-              "./darwin/configuration.nix"
+              ./darwin/configuration.nix
             ];
         };
       };
