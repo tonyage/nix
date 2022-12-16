@@ -30,25 +30,10 @@
         "x86_64-darwin"
       ];
 
-      common = { ... }: {
-        imports = [
-          ./modules/editor
-          ./modules/shell/ssh
-        ];
-      };
-
-      user-common = { ... }: {
-        _module.args = { colorscheme = import ./colorschemes/dusky.nix; };
+      common = {
         programs.home-manager.enable = true;
         home.stateVersion = "22.05";
-        imports = [ 
-	        ./modules/browser
-          ./modules/editor
-          ./modules/chat
-          ./modules/shell
-          ./modules/misc.nix
-	      ];
-
+        _module.args = { colorscheme = import ./colorschemes/dusky.nix; };
         nixpkgs = {
           overlays = [
             nurpkgs.overlay
@@ -57,14 +42,23 @@
           config.allowUnfree = true;
           config.allowUnfreePredicate = _: true;
         };
-        systemd.user.startServices = "sd-switch";
       };
-      
+
+      user-common = { ... }: {
+        imports = [ 
+	        ./modules/browser
+          ./modules/editor
+          ./modules/chat
+          ./modules/shell
+          ./modules/misc.nix
+	      ];
+      };
+
       system-common = { ... }: {
         imports = [ ./nixos/common/configuration.nix ];
       };
 
-      darwin = {
+      darwin = { ... }: {
         home.homeDirectory = "/Users/tony.do";
         home.username = "tony.do";
         imports = [
@@ -74,16 +68,22 @@
           ./modules/chat/slack
         ];
       };
-       
-      linux = {
+
+      linux = { ... }: {
         home.homeDirectory = "/home/tony";
         home.username = "tony";
 	      imports = [ ./modules/de ];
+        systemd.user.startServices = "sd-switch";
       };
 
-      server = {
+      server = { ... }: {
         home.homeDirectory = "/home/build";
         home.username = "build";
+        imports = [
+          ./modules/editor
+          ./modules/shell/ssh
+        ];
+        systemd.user.startServices = "sd-switch";
       };
 
     in {
