@@ -17,6 +17,11 @@
         user = "git";
         identityFile = "~/.ssh/work";
       };
+      "magneto" = {
+        hostname = "magneto";
+        user = "build";
+        identityFile = "~/.ssh/magneto";
+      };
     };
   };
 }

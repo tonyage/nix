@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ ... }: {
 
   imports = [
     ./hardware-configuration.nix
@@ -11,7 +11,7 @@
 
   services.openssh = {
     enable = true;
-    passwordAuthentication = false;
+    passwordAuthentication = true;
     permitRootLogin = "no";
   };
 }

@@ -50,29 +50,31 @@
       rust-tools-nvim
       crates-nvim
 
-      (nvim-treesitter.withPlugins (plugins: with plugins; [
-        tree-sitter-bash
-        tree-sitter-c
-        tree-sitter-cpp
-        tree-sitter-cmake
-        tree-sitter-css
-        tree-sitter-dockerfile
-        tree-sitter-html
-        tree-sitter-java
-        tree-sitter-kotlin
-        tree-sitter-latex
-        tree-sitter-lua
-        tree-sitter-markdown
-        tree-sitter-markdown-inline
-        tree-sitter-nix
-        tree-sitter-python
-        tree-sitter-regex
-        tree-sitter-ruby
-        tree-sitter-rust
-        tree-sitter-toml
-        tree-sitter-typescript
-        tree-sitter-yaml
-      ]))
+    nvim-treesitter.withAllGrammars
+      # (nvim-treesitter.withPlugins (plugins: with plugins; [
+      #   tree-sitter-bash
+      #   tree-sitter-c
+      #   tree-sitter-cpp
+      #   tree-sitter-cmake
+      #   tree-sitter-css
+      #   tree-sitter-dockerfile
+      #   tree-sitter-html
+      #   tree-sitter-java
+      #   tree-sitter-kotlin
+      #   tree-sitter-latex
+      #   tree-sitter-lua
+      #   tree-sitter-markdown
+      #   tree-sitter-markdown-inline
+      #   tree-sitter-nix
+      #   tree-sitter-python
+      #   tree-sitter-regex
+      #   tree-sitter-ruby
+      #   tree-sitter-rust
+      #   tree-sitter-toml
+      #   tree-sitter-typescript
+      #   tree-sitter-yaml
+      # ]))
+
 
       nvim-treesitter-refactor
       nvim-treesitter-textobjects
