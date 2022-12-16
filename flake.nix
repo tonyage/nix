@@ -31,7 +31,10 @@
       ];
 
       common = { ... }: {
-        imports = [ ./modules/editor ];
+        imports = [
+          ./modules/editor
+          ./modules/shell/ssh
+        ];
       };
 
       user-common = { ... }: {
@@ -66,8 +69,9 @@
         home.username = "tony.do";
         imports = [
           "./modules/shell"
-          "./modules/chat/slack"
+          "./modules/editor"
           "./modules/misc.nix"
+          "./modules/chat/slack"
         ];
       };
        
