@@ -1,6 +1,6 @@
 {
   "nodes": {
-    "darwin": {
+    "darwinpkgs": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -121,7 +121,7 @@
     },
     "root": {
       "inputs": {
-        "darwin": "darwin",
+        "darwinpkgs": "darwinpkgs",
         "hardware": "hardware",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",

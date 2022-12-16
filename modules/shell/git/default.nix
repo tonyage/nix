@@ -1,4 +1,4 @@
-{ colorscheme }: {
+{
   programs.git = {
     enable = true;
     userName = "Tony Do";
@@ -7,6 +7,7 @@
     includes = [
       { path = "~/Code/.gitconfig"; condition = "gitdir:~/Code"; }
       { path = "~/git/.gitconfig";  condition = "gitdir:~/git";  }
+      { path = "~/work/.gitconfig"; condition = "gitdir:~/work"; }
     ];
 
     delta = {
