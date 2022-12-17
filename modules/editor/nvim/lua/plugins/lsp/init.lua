@@ -6,7 +6,7 @@ local utils = require("plugins.lsp.utils")
 
 require("plugins.lsp.sumneko")
 require("plugins.lsp.rust")
--- require("plugins.lsp.yamlls")
+require("plugins.lsp.yamlls")
 require("fidget").setup()
 
 for _, server in ipairs(default_servers) do
