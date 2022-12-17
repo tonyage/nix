@@ -1,15 +1,14 @@
 local colors = require("ui.themer").colorscheme("vivid")
 
 return {
-  DiffAdd = { fg = colors.blue },
+  DiffAdd = { fg = colors.green },
   DiffAdded = { fg = colors.green },
   DiffChange = { fg = colors.grey01 },
-  DiffChangeDelete = { fg = colors.red },
+  DiffChangeDelete = { fg = colors.base0F },
   DiffModified = { fg = colors.orange },
-  DiffDelete = { fg = colors.red },
-  DiffRemoved = { fg = colors.red },
+  DiffDelete = { fg = colors.base0F },
+  DiffRemoved = { fg = colors.base0F },
 
-  -- git commits
   gitcommitOverflow = { fg = colors.base08 },
   gitcommitSummary = { fg = colors.base08 },
   gitcommitComment = { fg = colors.base03 },

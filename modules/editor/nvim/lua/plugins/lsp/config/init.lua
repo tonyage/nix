@@ -1,11 +1,11 @@
 local key = require("mappings")
+local windows = require("ui.windows")
+local navic = require("nvim-navic")
 local M = {}
 
-key.map("n", "<leader>o", vim.diagnostic.open_float, { noremap = true, silent = true })
+key.map("n", "gof", vim.diagnostic.open_float, { noremap = true, silent = true })
 key.map("n", "gn", vim.diagnostic.goto_next, { noremap = true, silent = true })
 key.map("n", "gb", vim.diagnostic.goto_prev, { noremap = true, silent = true })
-key.map("n", "gq", vim.diagnostic.setloclist, { noremap = true, silent = true } )
-
 local function lspSymbol(name, icon)
   local hl = "DiagnosticSign" .. name
   vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
@@ -25,14 +25,8 @@ vim.diagnostic.config {
   update_in_insert = false,
 }
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = "single",
-})
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = "single",
-  focusable = false,
-  relative = "cursor",
-})
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, windows.not_focusable)
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, windows.not_focusable)
 
 -- suppress error messages from lang servers
 vim.notify = function(msg, log_level)
@@ -46,15 +40,9 @@ vim.notify = function(msg, log_level)
   end
 end
 
--- Borders for LspInfo window
-local win = require "lspconfig.ui.windows"
-local _default_opts = win.default_opts
+local win = require("lspconfig.ui.windows")
 
-win.default_opts = function(options)
-  local opts = _default_opts(options)
-  opts.border = "single"
-  return opts
-end
+win.default_opts = windows.not_focusable
 
 M.on_attach = function(client, bufnr)
   client.server_capabilities.documentFormattingProvider = false
@@ -68,10 +56,10 @@ M.on_attach = function(client, bufnr)
   key.map("n", "gd", vim.lsp.buf.definition, opts)
   key.map("n", "gk", vim.lsp.buf.hover, opts)
   key.map("n", "gi", vim.lsp.buf.implementation, opts)
-  key.map("n", "gr", vim.lsp.buf.references, opts)
+  key.map("n", "gr", require("telescope.builtin").lsp_references, opts)
   key.map("n", "gsh", vim.lsp.buf.signature_help, opts)
   key.map("n", "gt", vim.lsp.buf.type_definition, opts)
-  key.map("n", "grn", function() require("plugins.renamer").open() end, opts)
+  key.map("n", "grn", vim.lsp.buf.rename, opts)
   key.map("n", "<A><CR>", vim.lsp.buf.code_action, opts)
   key.map("n", "gfm", function() vim.lsp.buf.format({ async = true }) end, opts)
   key.map("n", "gwa", vim.lsp.buf.add_workspace_folder, opts)
@@ -83,26 +71,12 @@ M.on_attach = function(client, bufnr)
   if client.server_capabilities.signatureHelpProvider then
     require("plugins.lsp.signature").setup(client)
   end
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
 end
 
-M.capabilities = vim.lsp.protocol.make_client_capabilities()
-M.capabilities.textDocument.completion.completionItem = {
-  documentationFormat = { "markdown", "plaintext" },
-  snippetSupport = true,
-  preselectSupport = true,
-  insertReplaceSupport = true,
-  labelDetailsSupport = true,
-  deprecatedSupport = true,
-  commitCharactersSupport = true,
-  tagSupport = { valueSet = { 1 } },
-  resolveSupport = {
-    properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits"
-    }
-  }
-}
+M.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 return M
 

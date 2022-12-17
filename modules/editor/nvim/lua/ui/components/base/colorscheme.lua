@@ -9,7 +9,7 @@ return {
   CursorLineNr = { fg = colors.white },
   Debug = { fg = colors.base08 },
   Directory = { fg = colors.base0D },
-  FloatBorder = { fg = colors.blue },
+  FloatBorder = { fg = colors.base01, bg = colors.base01 },
   NormalFloat = { bg = colors.base01 },
   NvimInternalError = { fg = colors.red },
   WinSeparator = { fg = colors.grey00 },
@@ -25,7 +25,7 @@ return {
   IncSearch = { fg = colors.base01, bg = colors.base09 },
   LineNr = { fg = colors.grey00 },
   Macro = { fg = colors.base08 },
-  MatchWord = { bg = colors.yellow, fg = colors.white },
+  MatchWord = { bg = colors.grey00, fg = colors.white },
   MatchParen = { link = "MatchWord" },
   ModeMsg = { fg = colors.base0B },
   MoreMsg = { fg = colors.base0B },
@@ -52,33 +52,5 @@ return {
   VisualNOS = { fg = colors.base0F },
   WarningMsg = { fg = colors.base0A },
   WildMenu = { fg = colors.base08, bg = colors.base0A },
-
-  -- Boolean = { fg = colors.base09 },
-  -- Character = { fg = colors.base0A },
-  -- Conditional = { fg = colors.base0E, bold = true, italic = true },
-  -- Constant = { fg = colors.base09 },
-
-  -- Define = { fg = colors.base0E, sp = "none" },
-  -- Delimiter = { fg = colors.base09 },
-  -- Float = { fg = colors.base09 },
-
-  -- Variable = { fg = colors.base05 },
-  -- Function = { fg = colors.base0D },
-  -- Identifier = { fg = colors.base08, sp = "none" },
-
-  -- Include = { fg = colors.base0D },
-
-  -- Label = { fg = colors.base0A },
-  -- Number = { fg = colors.base09 },
-  -- Operator = { fg = colors.base05, sp = "none" },
-  -- PreProc = { fg = colors.base0A },
-  -- Repeat = { fg = colors.base0A },
-
-  -- Special = { fg = colors.base0C },
-  -- SpecialChar = { fg = colors.base0F },
-  -- StorageClass = { fg = colors.base0A },
-
-  -- Tag = { fg = colors.base0A },
-  -- Todo = { fg = colors.base09, bg = colors.base00 },
 }
 

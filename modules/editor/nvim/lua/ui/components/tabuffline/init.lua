@@ -75,10 +75,13 @@ M.move_buf = function(n)
   util.refresh()
 end
 
+
+
 M.setup = function()
   local modules = require("ui.components.tabuffline.modules")
   local result = modules.bufferlist() .. (modules.tablist() or "") .. modules.buttons()
-  return modules.offset_tree() .. result
+  result = modules.offset_tree() .. modules.bufferlist() .. (modules.tablist() or "") .. modules.buttons()
+  return result
 end
 
 return M

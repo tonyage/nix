@@ -84,6 +84,19 @@ M.statusline_separators = {
   },
 }
 
+M.winbar = {
+  separator = {
+    light = {
+      left = "⟨",
+      right = "⟩"
+    },
+    medium = {
+      left = "❬",
+      right = "❭",
+    },
+  },
+}
+
 M.devicons = {
   default_icon = {
     icon = "",

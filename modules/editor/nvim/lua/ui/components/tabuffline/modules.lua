@@ -1,5 +1,6 @@
 local devicons_present, devicons = pcall(require, "nvim-web-devicons")
 local buf_is_valid = require("ui.components.tabuffline").buf_is_valid
+local themer = require("ui.themer")
 local util = require("ui.components")
 
 require("ui.themer").highlight("tabuffline")
@@ -38,13 +39,6 @@ vim.api.nvim_create_user_command("TbRight", function()
   require("ui.components.tabuffline").move_buf(1)
 end, {})
 
-local function new_hl(group1, group2)
-  local fg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(group1)), "fg#")
-  local bg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(group2)), "bg#")
-  vim.api.nvim_set_hl(0, "TbLine" .. group1 .. group2, { fg = fg, bg = bg })
-  return "%#" .. "TbLine" .. group1 .. group2 .. "#"
-end
-
 local function nvim_tree_width()
   for _, win in pairs(vim.api.nvim_tabpage_list_wins(0)) do
     if vim.bo[vim.api.nvim_win_get_buf(win)].ft == "NvimTree" then
@@ -71,8 +65,8 @@ local function add_file_info(name, bufnr)
     if not icon then icon, icon_hl = devicons.get_icon("default_icon") end
 
     icon = (
-      vim.api.nvim_get_current_buf() == bufnr and new_hl(icon_hl, "TbLineBufOn") .. " " .. icon
-      or new_hl(icon_hl, "TbLineBufOff") .. " " .. icon
+      vim.api.nvim_get_current_buf() == bufnr and themer.new_hl_groups("TbLine", icon_hl, "TbLineBufOn") .. " " .. icon
+      or themer.new_hl_groups("TbLine", icon_hl, "TbLineBufOff") .. " " .. icon
     )
 
     for _, value in ipairs(vim.t.bufs) do
@@ -114,7 +108,6 @@ local function style_buffer_tab(nr)
   local name = (#vim.api.nvim_buf_get_name(nr) ~= 0) and vim.fn.fnamemodify(vim.api.nvim_buf_get_name(nr), ":t") or " No Name "
   name = "%" .. nr .. "@TbGoToBuf@" .. add_file_info(name, nr) .. "%X"
 
-  -- color close btn for focused / hidden  buffers
   if nr == vim.api.nvim_get_current_buf() then
     close_btn = (vim.bo[0].modified and "%" .. nr .. "@TbKillBuf@%#TbLineBufOnModified# ")
       or ("%#TbLineBufOnClose#" .. close_btn)
@@ -131,12 +124,12 @@ end
 local M = {}
 
 M.offset_tree = function()
-  return "%#NvimTreeNormal#" .. string.rep(" ", nvim_tree_width()-1) .. "%#NvimTreeWinSeparator#" .. "▕"
+  return "%#NvimTreeNormal#" .. string.rep(" ", nvim_tree_width() - 1) .. "%#NvimTreeWinSeparator#" .. "▕"
 end
 
 M.bufferlist = function()
   local buffers = {}
-  local available_space = vim.o.columns + nvim_tree_width() - button_width()
+  local available_space = vim.o.columns - nvim_tree_width() - button_width()
   local current_buf = vim.api.nvim_get_current_buf()
   local has_current = false
 

@@ -3,19 +3,6 @@ require("ui.themer").highlight("cmp")
 
 vim.o.completeopt = "menu,menuone,noselect"
 
-local function border(hl_name)
-  return {
-    { "╭", hl_name },
-    { "─", hl_name },
-    { "╮", hl_name },
-    { "│", hl_name },
-    { "╯", hl_name },
-    { "─", hl_name },
-    { "╰", hl_name },
-    { "│", hl_name },
-  }
-end
-
 local cmp_window = require "cmp.utils.window"
 
 cmp_window.info_ = cmp_window.info
@@ -28,11 +15,12 @@ end
 local config = {
   window = {
     completion = {
-      border = border "CmpBorder",
       winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
+      col_offset = 0,
     },
     documentation = {
-      border = border "CmpDocBorder",
+      winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
+      col_offset = 0,
     },
   },
   snippet = {
@@ -94,3 +82,4 @@ local config = {
 }
 
 cmp.setup(config)
+

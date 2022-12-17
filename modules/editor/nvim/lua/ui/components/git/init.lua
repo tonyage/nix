@@ -1,13 +1,12 @@
 require("ui.themer").highlight("git")
 local key = require("mappings")
+local windows = require("ui.windows")
 local config = {
   current_line_blame = true,
   current_line_blame_opts = {
-    delay = 500
+    delay = 150
   },
-  preview_config = {
-    border = "rounded",
-  },
+  preview_config = windows.not_focusable,
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
     key.map("n", "gcn", function()
@@ -29,3 +28,4 @@ local config = {
   end
 }
 require("gitsigns").setup(config)
+

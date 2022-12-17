@@ -12,9 +12,10 @@
       nvim-colorizer-lua
 
       gitsigns-nvim
+      vim-fugitive
 
       nvim-tree-lua
-      cheatsheet-nvim
+      nvim-navic
 
       nvim-autopairs
       comment-nvim
@@ -25,13 +26,11 @@
       telescope-nvim
       telescope-fzf-native-nvim
 
-      nui-nvim
       plenary-nvim
       popup-nvim
       project-nvim
       nvim-web-devicons
 
-      friendly-snippets
       nvim-cmp
       luasnip
       cmp_luasnip
@@ -49,37 +48,9 @@
       null-ls-nvim
       rust-tools-nvim
       crates-nvim
-
-    nvim-treesitter.withAllGrammars
-      # (nvim-treesitter.withPlugins (plugins: with plugins; [
-      #   tree-sitter-bash
-      #   tree-sitter-c
-      #   tree-sitter-cpp
-      #   tree-sitter-cmake
-      #   tree-sitter-css
-      #   tree-sitter-dockerfile
-      #   tree-sitter-html
-      #   tree-sitter-java
-      #   tree-sitter-kotlin
-      #   tree-sitter-latex
-      #   tree-sitter-lua
-      #   tree-sitter-markdown
-      #   tree-sitter-markdown-inline
-      #   tree-sitter-nix
-      #   tree-sitter-python
-      #   tree-sitter-regex
-      #   tree-sitter-ruby
-      #   tree-sitter-rust
-      #   tree-sitter-toml
-      #   tree-sitter-typescript
-      #   tree-sitter-yaml
-      # ]))
-
-
+      nvim-treesitter.withAllGrammars
       nvim-treesitter-refactor
       nvim-treesitter-textobjects
-
-      which-key-nvim
     ];
 
     extraPackages = with pkgs; [
