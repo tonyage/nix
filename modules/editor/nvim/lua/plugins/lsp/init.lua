@@ -4,9 +4,9 @@ local null = require("null-ls")
 local config = require("plugins.lsp.config")
 local utils = require("plugins.lsp.utils")
 
--- require("lsp.saga")
 require("plugins.lsp.sumneko")
 require("plugins.lsp.rust")
+-- require("plugins.lsp.yamlls")
 require("fidget").setup()
 
 for _, server in ipairs(default_servers) do

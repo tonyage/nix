@@ -41,8 +41,8 @@ end, {})
 local function new_hl(group1, group2)
   local fg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(group1)), "fg#")
   local bg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(group2)), "bg#")
-  vim.api.nvim_set_hl(0, "Tbline" .. group1 .. group2, { fg = fg, bg = bg })
-  return "%#" .. "Tbline" .. group1 .. group2 .. "#"
+  vim.api.nvim_set_hl(0, "TbLine" .. group1 .. group2, { fg = fg, bg = bg })
+  return "%#" .. "TbLine" .. group1 .. group2 .. "#"
 end
 
 local function nvim_tree_width()
@@ -66,12 +66,9 @@ end
 local function add_file_info(name, bufnr)
   if devicons_present then
     local icon, icon_hl = devicons.get_icon(name, string.match(name, "%a+$"))
-
-    if not icon then
-      icon, icon_hl = devicons.get_icon("default_icon")
-    end
-
     local padding = (24 - #name - 5) / 2
+
+    if not icon then icon, icon_hl = devicons.get_icon("default_icon") end
 
     icon = (
       vim.api.nvim_get_current_buf() == bufnr and new_hl(icon_hl, "TbLineBufOn") .. " " .. icon
@@ -108,7 +105,6 @@ local function add_file_info(name, bufnr)
 
     name = (#name > 18 and string.sub(name, 1, 16) .. "..") or name
     name = (vim.api.nvim_get_current_buf() == bufnr and "%#TbLineBufOn# " .. name) or ("%#TbLineBufOff# " .. name)
-
     return string.rep(" ", padding) .. icon .. name .. string.rep(" ", padding)
   end
 end
@@ -135,7 +131,7 @@ end
 local M = {}
 
 M.offset_tree = function()
-  return "%#NvimTreeNormal#" .. string.rep(" ", nvim_tree_width())
+  return "%#NvimTreeNormal#" .. string.rep(" ", nvim_tree_width()-1) .. "%#NvimTreeWinSeparator#" .. "▕"
 end
 
 M.bufferlist = function()
@@ -150,7 +146,7 @@ M.bufferlist = function()
       local name = value:gsub("", "(".. index ..")")
       table.insert(buffers, name)
     end
-    return table.concat(buffers) .. "%#TblineFill#" .. "%="
+    return table.concat(buffers) .. "%#TbLineFill#" .. "%="
   end
 
   vim.g.buffirst = 0
@@ -168,7 +164,7 @@ M.bufferlist = function()
   end
 
   vim.g.visiblebuffers = buffers
-  return table.concat(buffers) .. "%#TblineFill#" .. "%="
+  return table.concat(buffers) .. "%#TbLineFill#" .. "%="
 end
 
 vim.g.toggletabs = 0
@@ -183,11 +179,11 @@ M.tablist = function()
       result = (i == vim.fn.tabpagenr() and result .. "%#TbLineTabCloseBtn#" .. "%@TbTabClose@ %X") or result
     end
 
-    local new_tabtn = "%#TblineTabNewBtn#" .. "%@TbNewTab@ %X"
-    local tabstoggleBtn = "%@TbToggleTabs@ %#TbTabTitle# TABS %X"
+    local new_tab_button = "%#TbLineTabNewBtn#" .. "%@TbNewTab@ %X"
+    local tabs_toggle_button = "%@TbToggleTabs@ %#TbTabTitle# TABS %X"
 
-    return vim.g.toggletabs == 1 and tabstoggleBtn:gsub("()", { [36] = " " })
-      or new_tabtn .. tabstoggleBtn .. result
+    return vim.g.toggletabs == 1 and tabs_toggle_button:gsub("()", { [36] = " " })
+      or new_tab_button .. tabs_toggle_button .. result
   end
 end
 

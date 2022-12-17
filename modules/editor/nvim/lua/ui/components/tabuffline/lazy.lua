@@ -44,7 +44,6 @@ return function(opts)
   })
 
   if opts.lazyload then
-    print("lazyloading...")
     vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", "TabEnter", "TermOpen" }, {
       pattern = "*",
       group = vim.api.nvim_create_augroup("TabufflineLazyLoad", {}),

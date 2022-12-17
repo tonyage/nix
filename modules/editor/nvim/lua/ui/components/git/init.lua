@@ -1,7 +1,7 @@
 require("ui.themer").highlight("git")
 local key = require("mappings")
 local config = {
-  on_attach = function(bufnr) 
+  on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
     key.map("n", "gcn", function()
       if vim.wo.diff then return "gcn" end

@@ -46,6 +46,12 @@ opt.updatetime = 300
 opt.cmdheight = 1
 opt.whichwrap:append "<>[]hl"
 
+opt.fillchars = {
+  vert = "▕",
+  eob = " ",
+  vertright = "▕",
+}
+
 local disabled_plugins = {
   "netrw",
   "netrwPlugin"
@@ -54,3 +60,4 @@ local disabled_plugins = {
 for _, plugin in pairs(disabled_plugins) do
   g[ "loaded_" .. plugin ] = 1
 end
+
