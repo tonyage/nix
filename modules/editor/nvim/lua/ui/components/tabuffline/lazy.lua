@@ -60,3 +60,4 @@ return function(opts)
     vim.opt.tabline = "%!v:lua.require('ui.components').tabuffline()"
   end
 end
+

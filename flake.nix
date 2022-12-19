@@ -33,7 +33,7 @@
       common = {
         programs.home-manager.enable = true;
         home.stateVersion = "22.05";
-        _module.args = { colorscheme = import ./colorschemes/dusky.nix; };
+        _module.args = { colorscheme = import ./colorschemes/dusk.nix; };
         nixpkgs = {
           overlays = [
             nurpkgs.overlay

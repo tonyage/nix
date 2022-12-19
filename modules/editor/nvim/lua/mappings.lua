@@ -21,7 +21,7 @@ M.map("x", "<leader>p", [["_dP]])
 M.map("n", "Q", "<nop>")
 
 
-print("hello from mappings")
+M.hello = function() print("hello from mappings") end
 
 return M
 

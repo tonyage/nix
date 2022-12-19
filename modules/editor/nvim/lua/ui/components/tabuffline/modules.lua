@@ -60,9 +60,6 @@ end
 local function add_file_info(name, bufnr)
   if devicons_present then
     local icon, icon_hl = devicons.get_icon(name, string.match(name, "%a+$"))
-    if not icon then
-      icon, icon_hl = devicons.get_icon("default_icon")
-    end
     local padding = (24 - #name - 5) / 2
 
     if not icon then icon, icon_hl = devicons.get_icon("default_icon") end

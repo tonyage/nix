@@ -2,7 +2,7 @@ local dusk = {}
 
 dusk.normal = {
   black          = "#161616";
-  red            = "#e07c75",
+  red            = "#e54f65",
   green          = "#89ca78",
   yellow         = "#e5c07b",
   blue           = "#61afef",
@@ -36,11 +36,11 @@ dusk.normal = {
 
 dusk.vivid = {
   black          = "#161616";
-  red            = "#ea767f",
+  red            = "#ef596f",
   green          = "#93d482",
   yellow         = "#efca85",
   blue           = "#6bb9f9",
-  magenta        = "#c678dd",
+  magenta        = "#d55fde",
   cyan           = "#60c0cc",
   white          = "#b5bcc9",
   orange         = "#f49f6a",
@@ -58,13 +58,13 @@ dusk.vivid = {
   base05         = "#505050",
   base06         = "#abb2bf",
   base07         = "#b5bcc9",
-  base08         = "#ea767f",
-  base09         = "#f49f6a",
-  base0A         = "#efca85",
-  base0B         = "#93d482",
-  base0C         = "#6fcfdb",
+  base08         = "#ef596f",
+  base09         = "#ea9560",
+  base0A         = "#e5c07b",
+  base0B         = "#89ca78",
+  base0C         = "#60c0cc",
   base0D         = "#6bb9f9",
-  base0E         = "#d082e7",
+  base0E         = "#d55fde",
   base0F         = "#f44747",
 }
 
