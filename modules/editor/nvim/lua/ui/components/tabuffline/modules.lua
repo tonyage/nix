@@ -3,7 +3,7 @@ local buf_is_valid = require("ui.components.tabuffline").buf_is_valid
 local themer = require("ui.themer")
 local util = require("ui.components")
 
-require("ui.themer").highlight("tabuffline")
+require("ui.themer").highlight("tabline")
 
 vim.cmd("function! TbGoToBuf(bufnr,b,c,d) \n execute 'b'..a:bufnr \n endfunction")
 vim.cmd[[

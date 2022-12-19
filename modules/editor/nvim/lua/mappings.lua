@@ -10,18 +10,16 @@ M.buffer_map = function(mode, lhs, rhs, opts)
   vim.api.nvim_buf_set_keymap(opts.buffer, mode, lhs, rhs, opts)
 end
 
+M.default = function()
+  M.map("v", ">", ">gv")
+  M.map("v", "<", "<gv")
+  M.map("v", "J", ":m '>+1<CR>gv=gv'")
+  M.map("v", "K", ":m '<-2<CR>gv=gv'")
 
-M.map("v", ">", ">gv")
-M.map("v", "<", "<gv")
-M.map("v", "J", ":m '>+1<CR>gv=gv'")
-M.map("v", "K", ":m '<-2<CR>gv=gv'")
-
-M.map("n", "<leader>n", "<cmd> NvimTreeToggle <CR>")
-M.map("x", "<leader>p", [["_dP]])
-M.map("n", "Q", "<nop>")
-
-
-M.hello = function() print("hello from mappings") end
+  M.map("n", "<leader>n", "<cmd> NvimTreeToggle <CR>")
+  M.map("x", "<leader>p", [["_dP]])
+  M.map("n", "Q", "<nop>")
+end
 
 return M
 
