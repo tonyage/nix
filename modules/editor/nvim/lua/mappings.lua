@@ -18,7 +18,10 @@ M.map("v", "K", ":m '<-2<CR>gv=gv'")
 
 M.map("n", "<leader>n", "<cmd> NvimTreeToggle <CR>")
 M.map("x", "<leader>p", [["_dP]])
+M.map("n", "Q", "<nop>")
 
+
+print("hello from mappings")
 
 return M
 

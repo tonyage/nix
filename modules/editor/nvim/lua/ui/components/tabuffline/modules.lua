@@ -60,6 +60,9 @@ end
 local function add_file_info(name, bufnr)
   if devicons_present then
     local icon, icon_hl = devicons.get_icon(name, string.match(name, "%a+$"))
+    if not icon then
+      icon, icon_hl = devicons.get_icon("default_icon")
+    end
     local padding = (24 - #name - 5) / 2
 
     if not icon then icon, icon_hl = devicons.get_icon("default_icon") end
@@ -99,6 +102,7 @@ local function add_file_info(name, bufnr)
 
     name = (#name > 18 and string.sub(name, 1, 16) .. "..") or name
     name = (vim.api.nvim_get_current_buf() == bufnr and "%#TbLineBufOn# " .. name) or ("%#TbLineBufOff# " .. name)
+    print(vim.inspect(string.rep(" ", padding) .. icon .. name .. string.rep(" ", padding)))
     return string.rep(" ", padding) .. icon .. name .. string.rep(" ", padding)
   end
 end
@@ -127,6 +131,10 @@ M.offset_tree = function()
   return "%#NvimTreeNormal#" .. string.rep(" ", nvim_tree_width() - 1) .. "%#NvimTreeWinSeparator#" .. "▕"
 end
 
+M.cover_nvim_tree = function()
+  return "%#NvimTreeNormal#" .. (vim.g.nvimtree_side == "right" and "" or string.rep(" ", nvim_tree_width()))
+end
+
 M.bufferlist = function()
   local buffers = {}
   local available_space = vim.o.columns - nvim_tree_width() - button_width()
@@ -135,8 +143,7 @@ M.bufferlist = function()
 
   if vim.g.pickbuffer then
     for index, value in ipairs(vim.g.visiblebuffers) do
-      print("index: " .. tostring(index))
-      local name = value:gsub("", "(".. index ..")")
+      local name = value:gsub("", "(" .. index .. ")")
       table.insert(buffers, name)
     end
     return table.concat(buffers) .. "%#TbLineFill#" .. "%="

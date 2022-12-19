@@ -1,7 +1,5 @@
 require("ui.themer").highlight("nvimtree")
 local config = {
-  open_on_setup = true;
-  open_on_setup_file = true;
   update_focused_file = { enable = true, update_cwd = true },
   renderer = {
     highlight_git = false,

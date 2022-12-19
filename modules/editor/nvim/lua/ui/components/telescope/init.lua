@@ -20,6 +20,7 @@ local config = {
       },
     },
     prompt_prefix = "   ",
+    results_title = false,
     file_ignore_patterns = { "^node_modules/", "^__pycache__/" },
     path_display = {
       "smart",
@@ -49,7 +50,6 @@ key.map("n", "<leader>sgf", builtin.git_files)
 key.map("n", "<leader>scm", builtin.git_commits)
 key.map("n", "<leader>gs", builtin.git_status)
 key.map("n", "<leader>sof", builtin.oldfiles)
-
-key.map("n", "grg", function()
+key.map("n", "<leader>rg", function()
   builtin.grep_string({ search = vim.fn.input(" ")})
 end)

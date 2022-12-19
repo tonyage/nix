@@ -2,7 +2,7 @@ local opt = vim.opt
 local g = vim.g
 
 g.mapleader = " "
-g.colorscheme = "dusky"
+g.colorscheme = "dusk"
 
 opt.autoindent = true
 opt.expandtab = true

@@ -55,7 +55,6 @@ return function(opts)
         end
       end,
     })
-    
   else
     vim.opt.showtabline = 2
     vim.opt.tabline = "%!v:lua.require('ui.components').tabuffline()"

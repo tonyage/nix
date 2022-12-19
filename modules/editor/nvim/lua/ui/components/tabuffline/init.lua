@@ -80,8 +80,8 @@ end
 M.setup = function()
   local modules = require("ui.components.tabuffline.modules")
   local result = modules.bufferlist() .. (modules.tablist() or "") .. modules.buttons()
-  result = modules.offset_tree() .. modules.bufferlist() .. (modules.tablist() or "") .. modules.buttons()
-  return result
+  -- result = modules.offset_tree() .. modules.bufferlist() .. (modules.tablist() or "") .. modules.buttons()
+  return (vim.g.nvimtree_side == "left") and modules.cover_nvim_tree() .. result or result .. modules.cover_nvim_tree()
 end
 
 return M

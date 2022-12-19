@@ -15,7 +15,7 @@ end
 
 function Themer.highlight(group)
   if type(group) == "string" then
-    group = require("ui.components." .. group .. ".colorscheme")
+    group = require("ui.themer.groups" .. group)
   end
 
   for k, v in pairs(group) do
