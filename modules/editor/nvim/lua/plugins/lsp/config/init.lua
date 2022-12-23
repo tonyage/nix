@@ -41,8 +41,9 @@ vim.notify = function(msg, log_level)
 end
 
 local win = require("lspconfig.ui.windows")
-
-win.default_opts = windows.not_focusable
+win.default_opts = function()
+  return windows.not_focusable
+end
 
 M.on_attach = function(client, bufnr)
   client.server_capabilities.documentFormattingProvider = false

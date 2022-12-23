@@ -2,9 +2,8 @@
   programs.ssh = {
     enable = true;
     hashKnownHosts = true;
-    controlMaster = "auto";
-    controlPath = "~/.ssh/master-%r@%h:%p";
-    controlPersist = "10m";
+    controlMaster = "no";
+    controlPath = "none";
 
     matchBlocks = {
       "personal" = {
@@ -20,6 +19,9 @@
       "magneto" = {
         hostname = "magneto";
         user = "build";
+        controlMaster = "auto";
+        controlPath = "~/.ssh/%r@%h:%p";
+        controlPersist = "yes";
         identityFile = "~/.ssh/magneto";
       };
     };

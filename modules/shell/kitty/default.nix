@@ -20,13 +20,13 @@
       color7 = "${colorscheme.bright-white}";
 
       color8 = "${colorscheme.bright-black}";
-      color9 = "${colorscheme.red}";
-      color10 = "${colorscheme.green}";
-      color11 = "${colorscheme.yellow}";
-      color12 = "${colorscheme.blue}";
-      color13 = "${colorscheme.magenta}";
-      color14 = "${colorscheme.cyan}";
-      color15 = "${colorscheme.white}";
+      color9 = "${colorscheme.bright-red}";
+      color10 = "${colorscheme.bright-green}";
+      color11 = "${colorscheme.bright-yellow}";
+      color12 = "${colorscheme.bright-blue}";
+      color13 = "${colorscheme.bright-magenta}";
+      color14 = "${colorscheme.bright-cyan}";
+      color15 = "${colorscheme.bright-white}";
     };
   };
 }
