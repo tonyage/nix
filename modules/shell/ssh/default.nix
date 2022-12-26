@@ -19,9 +19,6 @@
       "magneto" = {
         hostname = "magneto";
         user = "build";
-        controlMaster = "auto";
-        controlPath = "~/.ssh/%r@%h:%p";
-        controlPersist = "yes";
         identityFile = "~/.ssh/magneto";
       };
     };

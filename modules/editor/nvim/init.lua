@@ -1,5 +1,2 @@
-require("options")
+require("main")
 require("ui")
-require("mappings")
-require("plugins")
-
