@@ -1,5 +1,5 @@
 local lspconfig = require("lspconfig")
-local config = require("plugins.lsp.config")
+local config = require("lsp.config")
 
 lspconfig.yamlls.setup({
   on_attach = config.on_attach,

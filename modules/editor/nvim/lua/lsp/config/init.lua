@@ -1,4 +1,4 @@
-local key = require("mappings")
+local key = require("main.mappings")
 local windows = require("ui.windows")
 local navic = require("nvim-navic")
 local M = {}
@@ -6,6 +6,7 @@ local M = {}
 key.map("n", "gof", vim.diagnostic.open_float, { noremap = true, silent = true })
 key.map("n", "gn", vim.diagnostic.goto_next, { noremap = true, silent = true })
 key.map("n", "gb", vim.diagnostic.goto_prev, { noremap = true, silent = true })
+
 local function lspSymbol(name, icon)
   local hl = "DiagnosticSign" .. name
   vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
@@ -27,23 +28,6 @@ vim.diagnostic.config {
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, windows.not_focusable)
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, windows.not_focusable)
-
--- suppress error messages from lang servers
-vim.notify = function(msg, log_level)
-  if msg:match "exit code" then
-    return
-  end
-  if log_level == vim.log.levels.ERROR then
-    vim.api.nvim_err_writeln(msg)
-  else
-    vim.api.nvim_echo({ { msg } }, true, {})
-  end
-end
-
-local win = require("lspconfig.ui.windows")
-win.default_opts = function()
-  return windows.not_focusable
-end
 
 M.on_attach = function(client, bufnr)
   client.server_capabilities.documentFormattingProvider = false
@@ -70,7 +54,7 @@ M.on_attach = function(client, bufnr)
   end, opts)
 
   if client.server_capabilities.signatureHelpProvider then
-    require("plugins.lsp.signature").setup(client)
+    require("lsp.config.signature").setup(client)
   end
   if client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)

@@ -1,5 +1,5 @@
 local lspconfig = require("lspconfig")
-local config = require("plugins.lsp.config")
+local config = require("lsp.config")
 
 require("rust-tools").setup()
 require("rust-tools").inlay_hints.enable()

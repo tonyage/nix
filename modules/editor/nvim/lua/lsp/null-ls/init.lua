@@ -1,21 +1,5 @@
-local default_servers = { "bashls", "cmake", "cssls", "dockerls", "gopls", "html", "ltex", "nil_ls", "pyright", "tsserver" }
-local lspconfig = require("lspconfig")
 local null = require("null-ls")
-local config = require("plugins.lsp.config")
-local utils = require("plugins.lsp.utils")
-
-require("plugins.lsp.sumneko")
-require("plugins.lsp.rust")
-require("plugins.lsp.yamlls")
-require("fidget").setup()
-
-for _, server in ipairs(default_servers) do
-  lspconfig[server].setup({
-    on_attach = config.on_attach,
-    capabilities = config.capabilities,
-  })
-end
-
+local utils = require("lsp.utils")
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 null.setup({

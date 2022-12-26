@@ -1,4 +1,3 @@
-local util = require("ui.components")
 local M = {}
 
 M.buf_is_valid = function(bufnr)
@@ -41,7 +40,7 @@ M.close_buffer = function(bufnr)
     vim.cmd(vim.bo.buflisted and "set nobl | enew" or "hide")
   else
     bufnr = bufnr or vim.api.nvim_get_current_buf()
-    require("ui.components.tabuffline").tabufline_prev()
+    require("ui.tabline").tabufline_prev()
     vim.cmd("confirm bd" .. bufnr)
   end
 end
@@ -72,16 +71,16 @@ M.move_buf = function(n)
     end
   end
   vim.t.bufs = bufs
-  util.refresh()
+  vim.cmd("redrawtabline")
 end
 
 
 
 M.setup = function()
-  local modules = require("ui.components.tabuffline.modules")
-  local result = modules.bufferlist() .. (modules.tablist() or "") .. modules.buttons()
-  -- result = modules.offset_tree() .. modules.bufferlist() .. (modules.tablist() or "") .. modules.buttons()
-  return (vim.g.nvimtree_side == "left") and modules.cover_nvim_tree() .. result or result .. modules.cover_nvim_tree()
+  local sections = require("ui.tabline.sections")
+  local result = sections.bufferlist() .. (sections.tablist() or "") .. sections.buttons()
+  -- result = sections.offset_tree() .. sections.bufferlist() .. (sections.tablist() or "") .. sections.buttons()
+  return (vim.g.nvimtree_side == "left") and sections.cover_nvim_tree() .. result or result .. sections.cover_nvim_tree()
 end
 
 return M

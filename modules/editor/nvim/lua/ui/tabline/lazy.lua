@@ -1,5 +1,5 @@
-local buf_is_valid = require("ui.components.tabuffline").buf_is_valid
-local key = require("mappings")
+local buf_is_valid = require("ui.tabline").buf_is_valid
+local key = require("main.mappings")
 return function(opts)
   vim.t.bufs = vim.api.nvim_list_bufs()
 
@@ -23,8 +23,8 @@ return function(opts)
     end,
   })
 
-  key.map("n", "<TAB>", function() require("ui.components.tabuffline").tabufline_next() end)
-  key.map("n", "<S-TAB>", function() require("ui.components.tabuffline").tabufline_prev() end)
+  key.map("n", "<TAB>", function() require("ui.tabline").tabufline_next() end)
+  key.map("n", "<S-TAB>", function() require("ui.tabline").tabufline_prev() end)
 
   vim.api.nvim_create_autocmd("BufDelete", {
     callback = function(args)
@@ -50,14 +50,14 @@ return function(opts)
       callback = function()
         if #vim.fn.getbufinfo { buflisted = 1 } >= 2 or #vim.api.nvim_list_tabpages() >= 2 then
           vim.opt.showtabline = 2
-          vim.opt.tabline = "%!v:lua.require('ui.components').tabuffline()"
+          vim.opt.tabline = "%!v:lua.require('ui.tabline').setup()"
           vim.api.nvim_del_augroup_by_name("TabufflineLazyLoad")
         end
       end,
     })
   else
     vim.opt.showtabline = 2
-    vim.opt.tabline = "%!v:lua.require('ui.components').tabuffline()"
+    vim.opt.tabline = "%!v:lua.require('ui.tabline').setup()"
   end
 end
 

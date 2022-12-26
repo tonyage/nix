@@ -1,5 +1,5 @@
 require("ui.themer").highlight("git")
-local key = require("mappings")
+local key = require("main.mappings")
 local windows = require("ui.windows")
 local config = {
   current_line_blame = true,

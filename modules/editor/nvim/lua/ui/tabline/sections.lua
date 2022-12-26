@@ -1,42 +1,41 @@
 local devicons_present, devicons = pcall(require, "nvim-web-devicons")
-local buf_is_valid = require("ui.components.tabuffline").buf_is_valid
+local buf_is_valid = require("ui.tabline").buf_is_valid
 local themer = require("ui.themer")
-local util = require("ui.components")
 
 require("ui.themer").highlight("tabline")
 
 vim.cmd("function! TbGoToBuf(bufnr,b,c,d) \n execute 'b'..a:bufnr \n endfunction")
 vim.cmd[[
    function! TbKillBuf(bufnr,b,c,d) 
-        call luaeval('require("ui.components.tabuffline").close_buffer(_A)', a:bufnr)
+        call luaeval('require("ui.tabline").close_buffer(_A)', a:bufnr)
   endfunction]]
 vim.cmd("function! TbNewTab(a,b,c,d) \n tabnew \n endfunction")
 vim.cmd("function! TbGotoTab(tabnr,b,c,d) \n execute a:tabnr ..'tabnext' \n endfunction")
-vim.cmd("function! TbTabClose(a,b,c,d) \n lua require('ui.components.tabuffline').close_all_buffers('closeTab') \n endfunction")
-vim.cmd("function! TbCloseAllBufs(a,b,c,d) \n lua require('ui.components.tabuffline').close_all_buffers() \n endfunction")
+vim.cmd("function! TbTabClose(a,b,c,d) \n lua require('ui.tabline').close_all_buffers('closeTab') \n endfunction")
+vim.cmd("function! TbCloseAllBufs(a,b,c,d) \n lua require('ui.tabline').close_all_buffers() \n endfunction")
 vim.cmd("function! TbToggleTabs(a,b,c,d) \n let g:toggletabs = !g:TbTabsToggled | redrawtabline \n endfunction")
 
 vim.api.nvim_create_user_command("TbPick", function()
   vim.g.pickbuffer = true
   vim.api.nvim_echo({ { "Enter Num ", "Question" } }, false, {})
-
+  vim.cmd("redrawtabline")
   local key = tonumber(vim.fn.nr2char(vim.fn.getchar()))
   local bufid = vim.t.bufs[(key and key or 0) + vim.g.buffirst]
   if key and bufid then
     vim.cmd("b" .. bufid)
     vim.api.nvim_echo({ { "key: " .. key .. " bufid: " .. bufid } }, false, {})
-    util.refresh()
+    vim.cmd("redraw")
   end
   vim.g.pickbuffer = false
-  util.refresh()
+  vim.cmd("redrawtabline")
 end, {})
 
 vim.api.nvim_create_user_command("TbLeft", function()
-  require("ui.components.tabuffline").move_buf(-1)
+  require("ui.tabline").move_buf(-1)
 end, {})
 
 vim.api.nvim_create_user_command("TbRight", function()
-  require("ui.components.tabuffline").move_buf(1)
+  require("ui.tabline").move_buf(1)
 end, {})
 
 local function nvim_tree_width()

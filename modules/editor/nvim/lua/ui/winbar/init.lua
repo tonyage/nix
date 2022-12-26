@@ -1,5 +1,5 @@
 local navic = require("nvim-navic")
-local winbar = require('ui.components.winbar.modules')
+local winbar = require('ui.winbar.sections')
 local lspkind = require("ui.icons")["lspkind"]
 
 local config = {
