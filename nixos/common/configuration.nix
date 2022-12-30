@@ -27,13 +27,16 @@
   i18n.defaultLocale = "en_US.utf8";
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  services.xserver.enable = false;
   services.xserver.excludePackages = [ pkgs.xterm ];
 
   programs.dconf.enable = true;
+  programs.zsh.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  hardware.video.hidpi.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -76,14 +79,18 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     fd
+    exa
     git
     zsh
     curl
     neovim
+    zoxide
     ripgrep
     binutils
     coreutils
   ];
+
+  environment.shells = with pkgs; [ zsh ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

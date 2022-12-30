@@ -70,7 +70,7 @@
         home.username = "build";
         imports = [
           ./modules/editor
-          ./modules/shell/ssh
+          ./modules/shell
         ];
         systemd.user.startServices = "sd-switch";
       };
