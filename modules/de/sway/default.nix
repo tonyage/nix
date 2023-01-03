@@ -26,13 +26,12 @@ in {
 
     config = {
       terminal = "alacritty";
-      menu = "wofi --show run";
+      menu = "rofi --show run";
       bars = [ 
         { fonts.size = 15.0; position = "top"; }
       ];
       startup = [
-        { command = "chromium"; }
-        { command = "thunderbird"; }
+        { command = "alacritty"; }
       ];
     };
   };
@@ -60,11 +59,6 @@ in {
     extraConfig = {
       modi = "drun,run,ssh";
     };
-  };
-
-  services.udiskie = {
-    enable = true;
-    automount = false;
   };
 
   services.swayidle = {

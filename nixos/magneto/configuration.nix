@@ -4,6 +4,8 @@
     ./hardware-configuration.nix
   ];
 
+  networking.hostName = "magneto";
+
   users.users.build = {
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" "docker" ];

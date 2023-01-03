@@ -2,8 +2,7 @@
 let
   main = ./p10k/.p10k.zsh;
   tty = ./p10k/.p10k.tty.zsh;
-in
-{
+in {
 
   home.packages = with pkgs; [ zoxide fzf ];
 
