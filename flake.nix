@@ -17,9 +17,10 @@
 
     nurpkgs.url = "github:nix-community/NUR";
     rust.url = "github:oxalica/rust-overlay";
+    devshell.url = "github:numtide/devshell";
   };
 
-  outputs = { self, nixpkgs, home-manager, darwinpkgs, nurpkgs, rust, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, darwinpkgs, devshell, nurpkgs, rust, ... }@inputs:
     let
       inherit (self) outputs;
       forAllSystems = nixpkgs.lib.genAttrs [
@@ -38,6 +39,7 @@
           overlays = [
             nurpkgs.overlay
             rust.overlays.default
+            devshell.overlay
           ];
           config.allowUnfree = true;
           config.allowUnfreePredicate = _: true;
@@ -75,18 +77,29 @@
         systemd.user.startServices = "sd-switch";
       };
 
-    in {
+    in
+    {
       # custom packages go here accessible through 'nix build'
       packages = forAllSystems (system:
         let pkgs = nixpkgs.legacyPackages.${system};
       	in import ./shell.nix { inherit pkgs; }
       );
 
-      # devshell for bootstrapping, accessible through 'nix develop'
-      devShells = forAllSystems (system:
-        let pkgs = nixpkgs.legacyPackages.${system};
-	      in import ./shell.nix { inherit pkgs; }
+      devShell = forAllSystems (system:
+        let pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ devshell.overlay ];
+          };
+        in pkgs.devshell.mkShell {
+          imports = [ (pkgs.devshell.importTOML ./devshell.toml) ];
+        }
       );
+
+      # devshell for bootstrapping, accessible through 'nix develop'
+      # devShells = forAllSystems (system:
+      #   let pkgs = nixpkgs.legacyPackages.${system};
+	     #  in import ./shell.nix { inherit pkgs; }
+      # );
 
       overlays = import ./overlays;
 

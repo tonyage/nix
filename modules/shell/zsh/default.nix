@@ -4,12 +4,36 @@ let
   tty = ./p10k/.p10k.tty.zsh;
 in {
 
-  home.packages = with pkgs; [ zoxide fzf ];
+  home.packages = with pkgs; [ zoxide ];
 
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
-
+    # home manager says colors option doesn't exist but the docs say otherwise
+    # FIXME:
+    # colors = ''
+    # {
+    #   bg      = colorscheme.black;
+    #   "bg+"   = colorscheme.black;
+    #   fg      = colorscheme.white;
+    #   "fg+"   = colorscheme.green;
+    #   hl      = colorscheme.blue;
+    #   "hl+"   = colorscheme.cyan;
+    #   info    = colorscheme.yellow;
+    #   marker  = colorscheme.green;
+    #   prompt  = colorscheme.red;
+    #   spinner = colorscheme.blue;
+    #   pointer = colorscheme.magenta;
+    #   header  = "#FFFFFF";
+    # }'';
+    defaultCommand = "fd --type f --strip-cwd-prefix";
+    fileWidgetCommand = "fd --type f --strip-cwd-prefix --exclude .git";
+    defaultOptions = [
+      "--border"
+      "--color fg:${colorscheme.white},fg+:${colorscheme.green},bg:${colorscheme.black},bg+:${colorscheme.black}"
+      "--color hl:${colorscheme.blue},hl+:${colorscheme.cyan},info:${colorscheme.yellow},prompt:${colorscheme.red}"
+      "--color spinner:${colorscheme.blue},pointer:${colorscheme.magenta},header:#FFFFFF"
+    ];
   };
 
   programs.zsh = {
@@ -18,7 +42,7 @@ in {
     enableCompletion = true;
     enableSyntaxHighlighting = true;
     shellAliases = import ./aliases.nix;
-
+    defaultKeymap = "viins";
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
@@ -28,6 +52,7 @@ in {
       P10K_INSTANT_PROMPT="$XDG_CACHE_HOME/p10k-instant-prompt-''${(%):-%n}.zsh"
       [[ ! -r "$P10K_INSTANT_PROMPT" ]] || source "$P10K_INSTANT_PROMPT"
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=${colorscheme.grey90}'
+      ZSH_AUTOSUGGEST_STRATEGY=(history completion)
       ${builtins.readFile ./docker.zsh} 
       ${builtins.readFile ./utils.zsh} 
       eval $(zoxide init zsh)
@@ -43,7 +68,7 @@ in {
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "adb" "colored-man-pages" "fzf" "gradle" "ripgrep" "rust" "web-search" "zoxide" ];
+      plugins = [ "adb" "colored-man-pages" "cp" "fd" "fzf" "gradle" "ripgrep" "rust" "web-search" "zoxide" ];
     };
 
     plugins = [

@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+#
 flakify() {
   if [ ! -e flake.nix ]; then
     nix flake new -t github:nix-community/nix-direnv
@@ -16,5 +18,9 @@ jvm-flakify() {
     direnv allow
   fi
   "${EDITOR:-nvim}" flake.nix
+}
+
+gi() {
+  curl -sL https://www.gitignore.io/api/$argv >> ./.gitignore
 }
 
