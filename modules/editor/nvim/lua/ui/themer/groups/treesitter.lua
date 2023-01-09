@@ -75,8 +75,9 @@ return {
 
   ["@definition"] = { fg = colors.base07, underline = true },
   ["@scope"] = { bold = true },
-  ["@field"] = { fg = colors.base0C },
+  ["@field"] = { fg = colors.red },
   ["@include"] = { fg = colors.base0E, italic = true },
   ["@conditional"] = { fg = colors.base0E, italic = true },
 }
+
 

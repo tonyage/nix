@@ -15,25 +15,25 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    flake-utils.url = "github:numtide/flake-utils";
     nurpkgs.url = "github:nix-community/NUR";
     rust.url = "github:oxalica/rust-overlay";
     devshell.url = "github:numtide/devshell";
   };
 
-  outputs = { self, nixpkgs, home-manager, darwinpkgs, devshell, nurpkgs, rust, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, flake-utils, darwinpkgs, devshell, nurpkgs, rust, ... }@inputs:
     let
       inherit (self) outputs;
       forAllSystems = nixpkgs.lib.genAttrs [
-        "aarch64-linux"
-        "i686-linux"
-        "x86_64-linux"
         "aarch64-darwin"
+        "aarch64-linux"
         "x86_64-darwin"
+        "x86_64-linux"
       ];
 
       common = {
         programs.home-manager.enable = true;
-        home.stateVersion = "22.05";
+        home.stateVersion = "22.11";
         _module.args = { colorscheme = import ./colorschemes/dusk.nix; };
         nixpkgs = {
           overlays = [
@@ -71,37 +71,24 @@
         home.homeDirectory = "/home/build";
         home.username = "build";
         imports = [
-          ./modules/editor
+          ./modules/editor/nvim
           ./modules/shell
         ];
         systemd.user.startServices = "sd-switch";
       };
 
-    in
-    {
-      # custom packages go here accessible through 'nix build'
-      packages = forAllSystems (system:
-        let pkgs = nixpkgs.legacyPackages.${system};
-      	in import ./shell.nix { inherit pkgs; }
-      );
+    in {
+      overlays = import ./overlays;
 
       devShell = forAllSystems (system:
         let pkgs = import nixpkgs {
-            inherit system;
-            overlays = [ devshell.overlay ];
-          };
+          inherit system;
+          overlays = [ devshell.overlay ];
+        };
         in pkgs.devshell.mkShell {
           imports = [ (pkgs.devshell.importTOML ./devshell.toml) ];
         }
       );
-
-      # devshell for bootstrapping, accessible through 'nix develop'
-      # devShells = forAllSystems (system:
-      #   let pkgs = nixpkgs.legacyPackages.${system};
-	     #  in import ./shell.nix { inherit pkgs; }
-      # );
-
-      overlays = import ./overlays;
 
       nixosConfigurations = {
         cyclops = nixpkgs.lib.nixosSystem {
@@ -138,6 +125,21 @@
           modules = [
             common
             server
+          ];
+        };
+      };
+
+      darwinConfigurations = {
+        "m1" = darwinpkgs.lib.darwinSystem {
+          system = "aarch64-darwin";
+          inputs = { inherit darwinpkgs nixpkgs; };
+          modules = [ 
+            common
+            user-common
+            home-manager.darwinModules.home-manager {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+            }
           ];
         };
       };

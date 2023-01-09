@@ -71,3 +71,4 @@ dusk.vivid = {
 vim.opt.bg = "dark"
 
 return dusk
+

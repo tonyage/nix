@@ -1,5 +1,5 @@
 local null = require("null-ls")
-local utils = require("lsp.utils")
+local utils = require("lsp.null-ls.utils")
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 null.setup({

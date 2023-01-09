@@ -56,6 +56,7 @@ in {
       ${builtins.readFile ./docker.zsh} 
       ${builtins.readFile ./utils.zsh} 
       eval $(zoxide init zsh)
+      eval $(direnv hook zsh)
     '';
 
     initExtra = ''

@@ -1,10 +1,11 @@
-local default_servers = { "bashls", "cmake", "cssls", "dockerls", "gopls", "html", "ltex", "nil_ls", "pyright", "tsserver" }
+local default_servers = { "bashls", "cmake", "cssls", "dockerls", "gopls", "html", "ltex", "rnix", "nil_ls", "bufls", "pyright", "texlab", "tsserver" }
 local lspconfig = require("lspconfig")
 local config = require("lsp.config")
 
 require("lsp.sumneko")
 require("lsp.rust")
 require("lsp.yamlls")
+require("lsp.null-ls")
 require("fidget").setup()
 
 for _, server in ipairs(default_servers) do

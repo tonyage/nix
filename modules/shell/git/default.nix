@@ -2,13 +2,12 @@
   programs.git = {
     enable = true;
     includes = [
-      { path = "~/Code/.gitconfig"; condition = "gitdir:~/Code"; }
-      { path = "~/git/.gitconfig";  condition = "gitdir:~/git";  }
-      { path = "~/work/.gitconfig"; condition = "gitdir:~/work"; }
+      { path = "~/git/personal/.gitconfig";  condition = "gitdir:~/git/personal/";  }
+      { path = "~/git/work/.gitconfig"; condition = "gitdir:~/git/work/"; }
     ];
 
     userName = "Tony Do";
-    userEmail = "tony.do@pison.com";
+    userEmail = "tonyttdo@gmail.com";
 
     delta = {
       enable = true;

@@ -64,9 +64,11 @@
       luaformatter
 
       gitlint
+      texlab
 
       deadnix
       statix
+      rnix-lsp
       nil
 
       cmake-language-server
